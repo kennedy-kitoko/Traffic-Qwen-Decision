@@ -26036,5 +26036,80 @@
     "transformers": null,
     "unsloth": null,
     "wandb": null
+  },
+  "paired_specialization_ablation": {
+    "name": "Traffic-Qwen V1 traffic-specialization paired ablation",
+    "evaluation_framework": "JevLight legacy CityFlow",
+    "dataset": "Jinan 3x4 / anon_3_4_jinan_real.json",
+    "horizon_seconds": 3600,
+    "controller_seeds": [
+      3407,
+      3408,
+      3409
+    ],
+    "cityflow_engine_seeds": {
+      "3407": 83,
+      "3408": 48,
+      "3409": 2
+    },
+    "guardrail": false,
+    "fallback": false,
+    "architecture": "Same unsloth/Qwen3.5-0.8B backbone and Clef phase/duration decision architecture in both arms",
+    "base_model_revision": "23c69c53358a07516b5827588b3fdb12ae78fd65",
+    "trained_arm": "2-epoch, 4-bit QLoRA; LoRA rank/alpha 16/16; 792 train examples",
+    "untrained_arm": "No traffic-domain training; initialized Clef decision head",
+    "test_split_used": false,
+    "paired_reductions": {
+      "avg_queue": {
+        "mean_reduction_percent": 90.32328827205824,
+        "per_seed_percent": [
+          91.0566888534436,
+          90.3456358469006,
+          89.5675401158305
+        ],
+        "sample_sd_percentage_points": 0.7448258529748272
+      },
+      "avg_waiting_time_seconds": {
+        "mean_reduction_percent": 96.55760136875517,
+        "per_seed_percent": [
+          96.22574197960232,
+          96.72615615126443,
+          96.72090597539876
+        ],
+        "sample_sd_percentage_points": 0.28741064996505256
+      },
+      "avg_travel_time_seconds": {
+        "mean_reduction_percent": 77.77201599819668,
+        "per_seed_percent": [
+          81.81278156551637,
+          76.06628748396005,
+          75.43697894511361
+        ],
+        "sample_sd_percentage_points": 3.5135234575556216
+      }
+    },
+    "evidence": {
+      "results/reproducibility/report.md": {
+        "sha256": "c7f991162cd41bccc3bc0e868e4570b4b914bcb72ed442fc76be9922ba86a2cb",
+        "size_bytes": 2879
+      },
+      "results/reproducibility/summary.json": {
+        "sha256": "86b3dd9f87baf0e600dc0f781ba68435e4ce3b579cbf5e883f9db4c5b7611812",
+        "size_bytes": 14495
+      },
+      "results/reproducibility/comparison.csv": {
+        "sha256": "ea61c9cc7ea49ef5c8814512ee527be6b2f31d68d63b34da6fc24c1d2e44c07c",
+        "size_bytes": 2788
+      },
+      "results/reproducibility/environment.json": {
+        "sha256": "acd68dea6bd49b3498d12b6b49a094ee299c25e2539979e986ca7be56de881e7",
+        "size_bytes": 1030
+      },
+      "results/reproducibility/experiment_manifest.json": {
+        "sha256": "c97019aa963d1b7eef31c2c0e3ede680b8dea1bf7166f8d0684a14f6a1006e1e",
+        "size_bytes": 3242
+      }
+    },
+    "scope_limit": "Three seeds on the same Jinan traffic episode; no cross-network or SUMO generalization claim."
   }
 }

@@ -1,0 +1,35 @@
+{
+  "python": "3.10.22 (main, Oct  1 2026, 20:14:04) [GCC 14.3.0]",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python_executable": "python (traffic-laya environment)",
+  "cuda_available": true,
+  "torch_cuda_version": "13.0",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "gpu_total_memory_bytes": 8585216000,
+  "gpu_memory_free_total_bytes": [
+    7441743872,
+    8585216000
+  ],
+  "packages": {
+    "torch": "2.14.1",
+    "unsloth": "2026.10.2",
+    "transformers": "5.17.0",
+    "datasets": "4.8.5",
+    "accelerate": "1.15.0",
+    "peft": "0.21.2",
+    "bitsandbytes": "0.50.2",
+    "CityFlow": "0.1",
+    "laya": "0.3.29",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": null,
+    "matplotlib": "3.10.9",
+    "seaborn": null,
+    "tensorflow": null,
+    "wandb": "0.30.0"
+  },
+  "wandb_mode": "offline",
+  "hf_hub_offline": "1",
+  "jevlight_commit": "d92caa655e5a7487a49361626673df809eee9129",
+  "cityflow_source_commit": "81ee0f47659ca66177a71f81676691c58ee89184"
+}

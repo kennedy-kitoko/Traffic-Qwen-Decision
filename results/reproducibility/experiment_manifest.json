@@ -1,0 +1,88 @@
+{
+  "experiment": "Traffic-Qwen V1 Dual-Choice: traffic-untrained decision head vs traffic-trained model",
+  "status": "completed",
+  "completed_utc": "2026-10-08T20:27:28Z",
+  "seeds": [
+    3407,
+    3408,
+    3409
+  ],
+  "engine_seeds": {
+    "3407": 83,
+    "3408": 48,
+    "3409": 2
+  },
+  "horizon_seconds": 3600,
+  "dataset": "Jinan 3x4 / anon_3_4_jinan_real.json",
+  "base_model": "unsloth/Qwen3.5-0.8B",
+  "base_model_revision": "23c69c53358a07516b5827588b3fdb12ae78fd65",
+  "guardrail": false,
+  "fallback": false,
+  "paired_conditions_verified": true,
+  "source_hashes": {
+    "configs/reproducibility_v1.json": {
+      "sha256": "491292254016d98dae533fbfdc9e897071af37b1fe8460e5880e927ea30b41a3",
+      "bytes": 1289
+    },
+    "scripts/run_seeded_reproducibility.py": {
+      "sha256": "7b05dbd9f90f54a8b9f413279ecee4ca68700175e08e892a01a8ceaf4c6ce1c6",
+      "bytes": 11175
+    },
+    "scripts/evaluate_cityflow.py": {
+      "sha256": "9e946773c826906ac7ac6ee8d3a6ec0171349e7c8bf8b6ab52ab887b886aaad7",
+      "bytes": 13550
+    },
+    "scripts/train_traffic_qwen.py": {
+      "sha256": "fe382639e1880f4cce383912b844f74dc63ceea9171589d6050c3557fad21601",
+      "bytes": 10489
+    },
+    "scripts/summarize_reproducibility.py": {
+      "sha256": "1b0e1883126f23508e46aefa7a4bace1b1bc70107d5235770080f21e9f19e806",
+      "bytes": 15712
+    },
+    "data/traffic_qwen/v1_dual_choice/train.jsonl": {
+      "sha256": "26da482a97aafda1369dedd3a9e62e4c1b483d1fe24d8507e186f242d23240aa",
+      "bytes": 2955295
+    },
+    "data/traffic_qwen/v1_dual_choice/validation.jsonl": {
+      "sha256": "e9f65d634ef1fde39bbc1ceb117d00529296c107585b16f332de2a6612e50d13",
+      "bytes": 487140
+    },
+    "data/traffic_qwen/v1_dual_choice/test.jsonl": {
+      "sha256": "90a40a7a6833792ab21fd035306af65a79152fd39ef1a3d899ba60cd212b3e3c",
+      "bytes": 535801
+    }
+  },
+  "local_checkpoint_hashes": {
+    "3407": {
+      "adapter_model.safetensors": "b96d7bdffdc655b8e41ec37a3d3da88c392a15220bc1b57a9948f2a1d4f27240",
+      "joint_head.safetensors": "7c3346501f0a0868aa873b897a9e0a8dbf1f3e75d6aace3994c4791750569f08"
+    },
+    "3408": {
+      "adapter_model.safetensors": "8ee9bad48b4a8c65fe91568cc07bd3dd7fcb996cef3c0c873b41ee2670372e0f",
+      "joint_head.safetensors": "25a1fc3d6821cf8df82cbaeebfc21d941760be99b4b063c704ec07a9f310d4e9"
+    },
+    "3409": {
+      "adapter_model.safetensors": "4e60fa45203a1d857cc109a1637ad329bfdc7421b228599dc615bf3bbc50ab5e",
+      "joint_head.safetensors": "eac5cea51dc95a5e5b0f46697bd99d0a8183f6f23ca356ff02e2b62169f55908"
+    }
+  },
+  "baseline_integrity": {
+    "jevlight_source_sha256": "5902cc14a8b1cfba8e977858325d85c87f3c4fa495ee6a398664da3c2890869a",
+    "project_preserved_copy_sha256": "5902cc14a8b1cfba8e977858325d85c87f3c4fa495ee6a398664da3c2890869a",
+    "identical": true
+  },
+  "quality_checks": {
+    "python_compile": "passed",
+    "unittest_total": 15,
+    "unittest_passed": 13,
+    "unittest_failed": 0,
+    "unittest_skipped": 2
+  },
+  "evidence": {
+    "summary": "results/reproducibility/summary.json",
+    "report": "results/reproducibility/report.md",
+    "comparison_csv": "results/reproducibility/comparison.csv",
+    "environment": "results/reproducibility/environment.json"
+  }
+}

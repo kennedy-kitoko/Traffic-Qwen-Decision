@@ -35,6 +35,8 @@ class TrafficQwenAgent:
             raise ValueError(f"Unsupported action durations: {self.duration_options}")
         self.model_path = dic_agent_conf.get("TRAFFIC_QWEN_MODEL_PATH", "models/traffic-qwen-v1-dual-choice")
         self.device = dic_agent_conf.get("TRAFFIC_QWEN_DEVICE", "cuda")
+        self.seed = int(dic_agent_conf.get("SEED", 3407))
+        self.model_revision = dic_agent_conf.get("TRAFFIC_QWEN_MODEL_REVISION")
         self.use_guardrail = bool(dic_agent_conf.get("TRAFFIC_QWEN_GUARDRAIL", False))
         self.use_fallback = bool(dic_agent_conf.get("TRAFFIC_QWEN_FALLBACK", False))
         self.min_confidence = float(dic_agent_conf.get("TRAFFIC_QWEN_MIN_CONFIDENCE", 0.0))
@@ -56,11 +58,12 @@ class TrafficQwenAgent:
         self.last_decision_count = None
         self.phase_history = []
         self.duration_history = []
-        self._ensure_model(self.model_path, self.device)
+        self._ensure_model(self.model_path, self.device, self.seed, self.model_revision)
 
     @classmethod
-    def _ensure_model(cls, model_path, device):
-        key = (os.path.abspath(model_path), device)
+    def _ensure_model(cls, model_path, device, seed=3407, revision=None):
+        key = (os.path.abspath(model_path) if os.path.exists(model_path) else model_path,
+               device, int(seed), revision)
         with cls._model_lock:
             if cls._model is None or cls._model_key != key:
                 from unsloth import FastDecisionModel
@@ -69,6 +72,7 @@ class TrafficQwenAgent:
                 cls._model, cls._tokenizer = FastDecisionModel.from_pretrained(
                     model_path, max_seq_length=2048, dtype=dtype, load_in_4bit=True,
                     use_gradient_checkpointing="unsloth", local_files_only=True,
+                    random_state=int(seed), revision=revision,
                 )
                 if hasattr(cls._model, "to") and device and device != "auto":
                     # Unsloth places quantized modules itself; avoid .to() for 4-bit models.
@@ -79,9 +83,10 @@ class TrafficQwenAgent:
         return cls._model, cls._tokenizer
 
     @classmethod
-    def warmup(cls, model_path="models/traffic-qwen-v1-dual-choice", device="cuda"):
+    def warmup(cls, model_path="models/traffic-qwen-v1-dual-choice", device="cuda", seed=3407,
+               revision=None):
         from unsloth import FastDecisionModel
-        model, tokenizer = cls._ensure_model(model_path, device)
+        model, tokenizer = cls._ensure_model(model_path, device, seed, revision)
         sample_state = {"task": "traffic_signal_control", "warmup": True}
         questions = cls._questions()
         with cls._infer_lock:
@@ -138,7 +143,7 @@ class TrafficQwenAgent:
         self.last_guardrail = None
         self.last_fallback_used = False
         try:
-            model, tokenizer = self._ensure_model(self.model_path, self.device)
+            model, tokenizer = self._ensure_model(self.model_path, self.device, self.seed, self.model_revision)
             with self._infer_lock:
                 response = FastDecisionModel.predict(model, tokenizer, payload, questions)
             self.last_latency_ms = (time.perf_counter() - started) * 1000

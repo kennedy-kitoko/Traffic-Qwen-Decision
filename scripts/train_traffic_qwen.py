@@ -83,6 +83,7 @@ def main():
             load_in_4bit=cfg["load_in_4bit"],
             use_gradient_checkpointing=cfg["gradient_checkpointing"],
             random_state=seed, local_files_only=cfg.get("local_files_only", True),
+            revision=cfg.get("model_revision"),
         )
         report["model_load_seconds"] = time.perf_counter() - started
         report["is_clef"] = bool(getattr(model, "is_clef", False))

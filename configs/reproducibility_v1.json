@@ -1,0 +1,28 @@
+{
+  "experiment": "Traffic-Qwen V1 trained-vs-untrained paired seed comparison",
+  "seeds": [3407, 3408, 3409],
+  "dataset": "jinan",
+  "traffic_file": "anon_3_4_jinan_real.json",
+  "horizon_seconds": 3600,
+  "guardrail": false,
+  "fallback": false,
+  "base_model": "unsloth/Qwen3.5-0.8B",
+  "base_model_revision": "23c69c53358a07516b5827588b3fdb12ae78fd65",
+  "train_split": "data/traffic_qwen/v1_dual_choice/train.jsonl",
+  "validation_split": "data/traffic_qwen/v1_dual_choice/validation.jsonl",
+  "test_split": "data/traffic_qwen/v1_dual_choice/test.jsonl",
+  "training_config": "configs/traffic_qwen_v1_dual_choice.json",
+  "training_epochs": 2,
+  "lora_rank": 16,
+  "lora_alpha": 16,
+  "quantization_4bit": true,
+  "decision_outputs": ["phase", "duration"],
+  "decision_head": "Clef",
+  "notes": [
+    "Each trained run starts from the pinned base model and the same V1 training split.",
+    "The untrained comparator uses the same Clef decision model with a seed-initialized, untrained decision head and no traffic LoRA adapter.",
+    "Each trained/untrained pair uses the same seed and CityFlow Engine seed.",
+    "The test split is not used for training or calibration.",
+    "The source data is one Jinan episode; these runs do not establish cross-episode generalization."
+  ]
+}

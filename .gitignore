@@ -41,6 +41,7 @@ hf_cache/
 *.gguf
 
 # LoRA and checkpoints
+checkpoints/reproducibility/
 checkpoints/traffic-qwen-v1-dual-choice/*
 !checkpoints/traffic-qwen-v1-dual-choice/README.md
 !checkpoints/README.md
@@ -51,6 +52,7 @@ checkpoint-*/
 optimizer.pt
 scheduler.pt
 trainer_state.json
+unsloth_compiled_cache/
 
 # Experiment tracking
 wandb/
@@ -68,6 +70,8 @@ data/generated*/
 !data/README.md
 
 # Simulation outputs
+results/reproducibility/runs/
+results/reproducibility/training/*/trainer/
 records/
 errors/
 *.replay

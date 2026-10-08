@@ -11,6 +11,7 @@ def parse_args():
     p.add_argument("--traffic_file",default="anon_3_4_jinan_real.json")
     p.add_argument("--run_counts",type=int,default=3600)
     p.add_argument("--model_path",default="models/traffic-qwen-v1-dual-choice")
+    p.add_argument("--model_revision",default=None)
     p.add_argument("--device",default="cuda")
     p.add_argument("--seed",type=int,default=3407)
     mode=p.add_mutually_exclusive_group(); mode.add_argument("--guardrail",action="store_true"); mode.add_argument("--no_guardrail",action="store_true")
@@ -18,6 +19,8 @@ def parse_args():
     p.add_argument("--min_confidence",type=float,default=0.0)
     p.add_argument("--proj_name",default="Traffic-Qwen-V1-Dual-Choice")
     p.add_argument("--output_dir",default="")
+    p.add_argument("--skip_benchmark_update",action="store_true",
+                   help="Keep benchmark JSON files in the JevLight checkout untouched")
     return p.parse_args()
 
 def summarize_trace(trace_path, result, cfg, runtime):
@@ -103,7 +106,21 @@ def main():
     # Keep Unsloth/Torch ahead of CityFlow extension imports on this CUDA build.
     os.environ.update(WANDB_MODE="offline",HF_HUB_OFFLINE="1",TRANSFORMERS_OFFLINE="1",TOKENIZERS_PARALLELISM="false")
     from models.traffic_qwen_agent import TrafficQwenAgent
-    warm=TrafficQwenAgent.warmup(args.model_path,args.device)
+    import random
+    random.seed(args.seed)
+    try:
+        import numpy as np
+        np.random.seed(args.seed)
+    except ImportError:
+        pass
+    import torch
+    torch.manual_seed(args.seed)
+    if torch.cuda.is_available(): torch.cuda.manual_seed_all(args.seed)
+    warm=TrafficQwenAgent.warmup(args.model_path,args.device,args.seed,args.model_revision)
+    # CityFlowEnv draws its Engine seed from NumPy global state during reset.
+    # Reset it after model loading so paired arms get the exact same Engine seed.
+    np.random.seed(args.seed)
+    cityflow_seed=int(np.random.RandomState(args.seed).randint(0,100))
     print("Traffic-Qwen warmup completed",flush=True)
     roadnet,template=DATASETS[args.dataset]; rows,cols=map(int,roadnet.split("_")); n=rows*cols
     data_path=os.path.join("data",template,roadnet); traffic_path=os.path.join(data_path,args.traffic_file); roadnet_file=f"roadnet_{roadnet}.json"
@@ -125,17 +142,24 @@ def main():
         "AGENT_CONF":{"TRAFFIC_QWEN_GUARDRAIL":bool(args.guardrail),"TRAFFIC_QWEN_FALLBACK":bool(args.fallback)},
         "LABEL":f"seed_{args.seed}_guardrail_{bool(args.guardrail)}_fallback_{bool(args.fallback)}"}
     agent_conf={"TRAFFIC_QWEN_MODEL_PATH":args.model_path,"TRAFFIC_QWEN_DEVICE":args.device,
+        "TRAFFIC_QWEN_MODEL_REVISION":args.model_revision,
         "TRAFFIC_QWEN_GUARDRAIL":bool(args.guardrail),"TRAFFIC_QWEN_FALLBACK":bool(args.fallback),
         "TRAFFIC_QWEN_MIN_CONFIDENCE":args.min_confidence,"SEED":args.seed}
     paths={"PATH_TO_MODEL":f"model/traffic_qwen_runtime/{timestamp}_{args.run_counts}s",
            "PATH_TO_WORK_DIRECTORY":str(output),"PATH_TO_DATA":data_path}
     cfg={"RUN_COUNTS":args.run_counts,"AGENT_CONF":agent_conf,"OUTPUT_DIR":str(output)}
-    env_artifact=Path("artifacts/traffic_qwen/v1_dual_choice/evaluation")
+    env_artifact=(output.parent / "environment_manifests" if args.output_dir
+                  else Path("artifacts/traffic_qwen/v1_dual_choice/evaluation"))
     env_artifact.mkdir(parents=True,exist_ok=True)
+    wandb_dir=env_artifact/"wandb"/output.name
+    wandb_dir.mkdir(parents=True,exist_ok=True)
+    os.environ["WANDB_DIR"]=str(wandb_dir)
     (env_artifact/f"environment_{timestamp}_{args.run_counts}s_guardrail_{bool(args.guardrail)}.json").write_text(json.dumps({
         "python":__import__("sys").version,"seed":args.seed,"torch":__import__("torch").__version__,
         "cuda":__import__("torch").version.cuda,"gpu":__import__("torch").cuda.get_device_name(0),
         "model":args.model_path,"device":args.device,"run_counts":args.run_counts,
+        "model_revision":args.model_revision,
+        "seed":args.seed,"cityflow_engine_seed":cityflow_seed,
         "guardrail":args.guardrail,"fallback":args.fallback,"warmup":warm},indent=2,ensure_ascii=False)+"\n")
     runner=OneLine(dic_agent_conf=agent_conf,dic_traffic_env_conf=merge(config.dic_traffic_env_conf,traffic_conf),
         dic_path=merge(config.DIC_PATH,paths),roadnet=f"{template}-{roadnet}",trafficflow=args.traffic_file.rsplit(".",1)[0])
@@ -151,7 +175,8 @@ def main():
         "waiting_time_mean_proxy_seconds":metric["waiting_series_mean_proxy_by_sample"]},separators=(",",":"))+"\n")
     (output/"traffic_qwen_metrics.json").write_text(json.dumps(metric,indent=2,ensure_ascii=False)+"\n")
     print(json.dumps(metric,indent=2,ensure_ascii=False),flush=True)
-    if args.run_counts==3600 and args.dataset=="jinan" and args.traffic_file=="anon_3_4_jinan_real.json":
+    if (not args.skip_benchmark_update and args.run_counts==3600 and args.dataset=="jinan"
+            and args.traffic_file=="anon_3_4_jinan_real.json"):
         benchmark_path=Path("results/benchmark_jinan.json"); original=json.loads(benchmark_path.read_text())
         expanded=json.loads(json.dumps(original)); output_benchmark=Path("results/benchmark_jinan_with_traffic_qwen_v1.json")
         if output_benchmark.exists():

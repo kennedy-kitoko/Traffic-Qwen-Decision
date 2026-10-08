@@ -46,6 +46,43 @@ Without guardrail, Traffic-Qwen used all four phases, switched phase 1,262 times
 
 The tracked results include the report, machine-readable metrics, comparison, offline evaluation, and figures. Full raw and compressed decision traces are retained locally under results/traces/ for audit, but are Git-ignored because redistribution terms for the Jinan-derived observations are unverified. The extended benchmark preserves the original JevLight schema; the original benchmark was not overwritten.
 
+## Traffic Specialization Ablation
+
+To isolate the effect of traffic-specific training, we compared Traffic-Qwen against the same `Qwen3.5-0.8B` and Clef decision architecture without traffic training. Both controllers were evaluated without guardrail corrections or request fallbacks.
+
+The untrained arm uses the base Qwen/Clef decision model with an initialized decision head but no traffic-domain learning. The trained arm uses the same architecture after QLoRA fine-tuning on the 792 Traffic-Qwen V1 training examples for two epochs, with LoRA rank and alpha set to 16/16.
+
+### Paired CityFlow results
+
+| Seed | Controller | Average queue | Average waiting (s) | Average travel time (s) |
+|---:|---|---:|---:|---:|
+| 3407 | Untrained Qwen/Clef | 1,751.96 | 999.11 | 1,559.67 |
+| 3407 | Traffic-Qwen | 156.68 | 37.71 | 283.66 |
+| 3408 | Untrained Qwen/Clef | 1,422.10 | 943.71 | 1,135.71 |
+| 3408 | Traffic-Qwen | 137.29 | 30.90 | 271.82 |
+| 3409 | Untrained Qwen/Clef | 1,422.10 | 943.71 | 1,135.71 |
+| 3409 | Traffic-Qwen | 148.36 | 30.95 | 278.96 |
+
+Across the three paired runs, traffic-specific training produced mean paired reductions of:
+
+- **90.32%** in average queue length;
+- **96.56%** in average waiting time;
+- **77.77%** in average travel time.
+
+The untrained Qwen/Clef controller locked onto one phase during every run and made no phase changes. Each trained Traffic-Qwen controller used all four phases and made between 1,565 and 1,694 phase changes. Neither arm used guardrail corrections or request fallbacks.
+
+These results provide direct evidence that traffic-specific learning, rather than the backbone architecture alone, is responsible for the functional traffic-control behavior observed in this Jinan experiment.
+
+> **Interpretation limit:** The three runs use different training and controller seeds but the same underlying Jinan traffic episode. This experiment demonstrates consistent specialization within the evaluated scenario; it does not establish zero-shot generalization to unseen traffic episodes, networks, cities, incidents, or SUMO environments.
+
+The trained controllers also remained strongly concentrated on 20-second green durations. Their frequent phase switching and duration collapse remain limitations that must be addressed in Traffic-Qwen V2.
+
+Detailed reproducibility evidence:
+
+- [Paired comparison report](results/reproducibility/report.md)
+- [Machine-readable summary](results/reproducibility/summary.json)
+- [Comparison CSV](results/reproducibility/comparison.csv)
+
 ## Quick setup
 
 Use Ubuntu 22.04/24.04 with Python 3.10, an NVIDIA GPU and CUDA-capable driver. The measured machine was WSL2 Ubuntu, Python 3.10.22, RTX 4060 Laptop GPU (8 GiB), driver 581.80, Torch 2.14.1+cu130. See artifacts_manifest/environment.json.
@@ -93,6 +130,8 @@ The local checkpoints/traffic-qwen-v1-dual-choice folder contains the adapter an
 Traffic-Qwen code is MIT; see LICENSE and third_party/. The Qwen base model card identifies Apache-2.0. JevLight is MIT and CityFlow is Apache-2.0. Dataset files are not redistributed here.
 
 ## Scientific status
+
+A paired ablation using the same Qwen3.5-0.8B/Clef architecture shows that traffic-specific fine-tuning consistently eliminates phase-lock failure and substantially improves traffic efficiency on the evaluated Jinan episode. This is evidence of domain specialization, not yet evidence of cross-network generalization.
 
 The measured result is best described as partial transfer: phase lock was eliminated on the evaluated episode and no-guardrail traffic metrics approached guarded Laya, but duration choice collapsed to two classes and the maximum non-service proxy remained high. See docs/limitations.md, docs/methodology.md, and docs/future_work.md.
 

@@ -1,0 +1,533 @@
+{
+  "experiment": "Traffic-Qwen V1 Dual-Choice: traffic-untrained decision head vs traffic-trained model",
+  "completed_utc": "2026-10-08T20:27:28Z",
+  "seeds": [
+    3407,
+    3408,
+    3409
+  ],
+  "horizon_seconds": 3600,
+  "dataset": "Jinan 3x4 / anon_3_4_jinan_real.json",
+  "guardrail": false,
+  "fallback": false,
+  "base_model": "unsloth/Qwen3.5-0.8B",
+  "base_model_revision": "23c69c53358a07516b5827588b3fdb12ae78fd65",
+  "training_rows": 792,
+  "validation_rows": 130,
+  "test_rows_not_used": 143,
+  "training": {
+    "3407": {
+      "training_seconds": 510.5385962029977,
+      "elapsed_seconds": 588.8415665626526,
+      "global_step": 50,
+      "peak_gpu_memory_GiB": 2.0797677040100098,
+      "validation": {
+        "eval_loss": 0.354999840259552,
+        "eval_runtime": 19.1156,
+        "eval_samples_per_second": 6.801,
+        "eval_steps_per_second": 6.801,
+        "epoch": 2.0
+      },
+      "checkpoint": "checkpoints/reproducibility/trained-seed-3407"
+    },
+    "3408": {
+      "training_seconds": 544.0517309379939,
+      "elapsed_seconds": 625.6012761592865,
+      "global_step": 50,
+      "peak_gpu_memory_GiB": 2.083763599395752,
+      "validation": {
+        "eval_loss": 0.28013721108436584,
+        "eval_runtime": 17.8865,
+        "eval_samples_per_second": 7.268,
+        "eval_steps_per_second": 7.268,
+        "epoch": 2.0
+      },
+      "checkpoint": "checkpoints/reproducibility/trained-seed-3408"
+    },
+    "3409": {
+      "training_seconds": 546.1731102710037,
+      "elapsed_seconds": 624.0395340919495,
+      "global_step": 50,
+      "peak_gpu_memory_GiB": 2.080854892730713,
+      "validation": {
+        "eval_loss": 0.32097408175468445,
+        "eval_runtime": 15.8356,
+        "eval_samples_per_second": 8.209,
+        "eval_steps_per_second": 8.209,
+        "epoch": 2.0
+      },
+      "checkpoint": "checkpoints/reproducibility/trained-seed-3409"
+    }
+  },
+  "results_by_arm": {
+    "untrained": {
+      "reward": {
+        "values": [
+          -315049.3,
+          -255705.84999999998,
+          -255705.84999999998
+        ],
+        "mean": -275487.0,
+        "sample_std": 34261.956832141106
+      },
+      "avg_queue": {
+        "values": [
+          1751.9611111111112,
+          1422.0972222222222,
+          1422.0972222222222
+        ],
+        "mean": 1532.0518518518518,
+        "sample_std": 190.4470050459369
+      },
+      "avg_waiting_time_seconds": {
+        "values": [
+          999.11145536879,
+          943.7143909328897,
+          943.7143909328897
+        ],
+        "mean": 962.1800790781898,
+        "sample_std": 31.983510064382042
+      },
+      "avg_travel_time_seconds": {
+        "values": [
+          1559.6748803827752,
+          1135.7069597069597,
+          1135.7069597069597
+        ],
+        "mean": 1277.0295999322316,
+        "sample_std": 244.77799312994802
+      },
+      "runtime_seconds": {
+        "values": [
+          216.43559294300212,
+          191.73396376099845,
+          148.3029390849988
+        ],
+        "mean": 185.49083192966646,
+        "sample_std": 34.49271157405818
+      },
+      "model_decisions": {
+        "values": [
+          1549.0,
+          1409.0,
+          1080.0
+        ],
+        "mean": 1346.0,
+        "sample_std": 240.76336930687773
+      },
+      "phase_switches": {
+        "values": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean": 0.0,
+        "sample_std": 0.0
+      },
+      "current_phase_retention": {
+        "values": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "mean": 1.0,
+        "sample_std": 0.0
+      },
+      "maximum_non_service_time_seconds": {
+        "values": [
+          3600.0,
+          3600.0,
+          3600.0
+        ],
+        "mean": 3600.0,
+        "sample_std": 0.0
+      },
+      "latency_p50_ms": {
+        "values": [
+          93.28701900085434,
+          91.22725499037188,
+          85.2890674941591
+        ],
+        "mean": 89.9344471617951,
+        "sample_std": 4.152748624355225
+      },
+      "latency_p95_ms": {
+        "values": [
+          125.31758879777044,
+          122.75486139114946,
+          118.24629040638682
+        ],
+        "mean": 122.10624686510224,
+        "sample_std": 3.5799917370778584
+      },
+      "GPU_peak_memory_GiB": {
+        "values": [
+          1.2524089813232422,
+          1.2524709701538086,
+          1.2524709701538086
+        ],
+        "mean": 1.2524503072102864,
+        "sample_std": 3.578926801426475e-05
+      },
+      "phase_confidence_mean": {
+        "values": [
+          0.2519301484828922,
+          0.2524669268985096,
+          0.25363416666666666
+        ],
+        "mean": 0.25267708068268946,
+        "sample_std": 0.0008712307113574214
+      },
+      "duration_confidence_mean": {
+        "values": [
+          0.16815287282117494,
+          0.16836444286728175,
+          0.17063592592592594
+        ],
+        "mean": 0.16905108053812753,
+        "sample_std": 0.0013765869563967968
+      },
+      "all_runs_guardrail_corrections": [
+        0,
+        0,
+        0
+      ],
+      "all_runs_request_fallbacks": [
+        0,
+        0,
+        0
+      ],
+      "phase_distributions": [
+        {
+          "2": 1549
+        },
+        {
+          "1": 1409
+        },
+        {
+          "1": 1080
+        }
+      ],
+      "duration_distributions_seconds": [
+        {
+          "15": 601,
+          "35": 729,
+          "40": 219
+        },
+        {
+          "30": 1304,
+          "40": 105
+        },
+        {
+          "40": 1080
+        }
+      ]
+    },
+    "traffic_trained": {
+      "reward": {
+        "values": [
+          -27852.299999999992,
+          -24349.900000000012,
+          -26321.599999999984
+        ],
+        "mean": -26174.599999999995,
+        "sample_std": 1755.8212295105563
+      },
+      "avg_queue": {
+        "values": [
+          156.68333333333334,
+          137.29444444444445,
+          148.35972222222222
+        ],
+        "mean": 147.44583333333333,
+        "sample_std": 9.726697680217352
+      },
+      "avg_waiting_time_seconds": {
+        "values": [
+          37.709044236968545,
+          30.895735537188834,
+          30.94528220238235
+        ],
+        "mean": 33.18335399217991,
+        "sample_std": 3.9194410139507405
+      },
+      "avg_travel_time_seconds": {
+        "values": [
+          283.6614773629865,
+          271.81683876092137,
+          278.96393963463066
+        ],
+        "mean": 278.1474185861795,
+        "sample_std": 5.964385623876579
+      },
+      "runtime_seconds": {
+        "values": [
+          249.03566952400433,
+          265.83318042900646,
+          267.9959811299923
+        ],
+        "mean": 260.95494369433436,
+        "sample_std": 10.378884780103718
+      },
+      "model_decisions": {
+        "values": [
+          1617.0,
+          1744.0,
+          1743.0
+        ],
+        "mean": 1701.3333333333333,
+        "sample_std": 73.03652054508986
+      },
+      "phase_switches": {
+        "values": [
+          1565.0,
+          1692.0,
+          1694.0
+        ],
+        "mean": 1650.3333333333333,
+        "sample_std": 73.9075999700527
+      },
+      "current_phase_retention": {
+        "values": [
+          0.024922118380062305,
+          0.023094688221709007,
+          0.021374927787406125
+        ],
+        "mean": 0.023130578129725812,
+        "sample_std": 0.0017738676216900223
+      },
+      "maximum_non_service_time_seconds": {
+        "values": [
+          720.0,
+          650.0,
+          475.0
+        ],
+        "mean": 615.0,
+        "sample_std": 126.19429464123962
+      },
+      "latency_p50_ms": {
+        "values": [
+          128.0562909960281,
+          128.93394500133581,
+          130.6837820011424
+        ],
+        "mean": 129.22467266616877,
+        "sample_std": 1.337654356257075
+      },
+      "latency_p95_ms": {
+        "values": [
+          173.9971076021902,
+          171.8735194037435,
+          178.28673980839085
+        ],
+        "mean": 174.7191222714415,
+        "sample_std": 3.267005949888497
+      },
+      "GPU_peak_memory_GiB": {
+        "values": [
+          1.2906408309936523,
+          1.2906408309936523,
+          1.2906408309936523
+        ],
+        "mean": 1.2906408309936523,
+        "sample_std": 0.0
+      },
+      "phase_confidence_mean": {
+        "values": [
+          0.8132423623995052,
+          0.8497780389908257,
+          0.8145686173264487
+        ],
+        "mean": 0.8258630062389265,
+        "sample_std": 0.0207216392130574
+      },
+      "duration_confidence_mean": {
+        "values": [
+          0.9681136054421768,
+          0.9895462155963303,
+          0.9364156626506024
+        ],
+        "mean": 0.9646918278963699,
+        "sample_std": 0.02673004555288749
+      },
+      "all_runs_guardrail_corrections": [
+        0,
+        0,
+        0
+      ],
+      "all_runs_request_fallbacks": [
+        0,
+        0,
+        0
+      ],
+      "phase_distributions": [
+        {
+          "0": 591,
+          "1": 516,
+          "2": 274,
+          "3": 236
+        },
+        {
+          "0": 624,
+          "1": 587,
+          "2": 263,
+          "3": 270
+        },
+        {
+          "0": 601,
+          "1": 617,
+          "2": 265,
+          "3": 260
+        }
+      ],
+      "duration_distributions_seconds": [
+        {
+          "20": 1457,
+          "40": 160
+        },
+        {
+          "20": 1744
+        },
+        {
+          "20": 1743
+        }
+      ]
+    }
+  },
+  "paired_reduction_percent_lower_is_better": {
+    "avg_queue": {
+      "values": [
+        91.0566888534436,
+        90.3456358469006,
+        89.5675401158305
+      ],
+      "mean": 90.32328827205824,
+      "sample_std": 0.7448258529748272
+    },
+    "avg_waiting_time_seconds": {
+      "values": [
+        96.22574197960232,
+        96.72615615126442,
+        96.72090597539875
+      ],
+      "mean": 96.55760136875516,
+      "sample_std": 0.28741064996504434
+    },
+    "avg_travel_time_seconds": {
+      "values": [
+        81.81278156551637,
+        76.06628748396005,
+        75.43697894511361
+      ],
+      "mean": 77.77201599819668,
+      "sample_std": 3.5135234575556216
+    }
+  },
+  "engine_seeds": {
+    "3407": 83,
+    "3408": 48,
+    "3409": 2
+  },
+  "environment": {
+    "python": "3.10.22 (main, Oct  1 2026, 20:14:04) [GCC 14.3.0]",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python_executable": "python (traffic-laya environment)",
+    "cuda_available": true,
+    "torch_cuda_version": "13.0",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_total_memory_bytes": 8585216000,
+    "gpu_memory_free_total_bytes": [
+      7441743872,
+      8585216000
+    ],
+    "packages": {
+      "torch": "2.14.1",
+      "unsloth": "2026.10.2",
+      "transformers": "5.17.0",
+      "datasets": "4.8.5",
+      "accelerate": "1.15.0",
+      "peft": "0.21.2",
+      "bitsandbytes": "0.50.2",
+      "CityFlow": "0.1",
+      "laya": "0.3.29",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "scikit-learn": null,
+      "matplotlib": "3.10.9",
+      "seaborn": null,
+      "tensorflow": null,
+      "wandb": "0.30.0"
+    },
+    "wandb_mode": "offline",
+    "hf_hub_offline": "1",
+    "jevlight_commit": "d92caa655e5a7487a49361626673df809eee9129",
+    "cityflow_source_commit": "81ee0f47659ca66177a71f81676691c58ee89184"
+  },
+  "source_hashes": {
+    "configs/reproducibility_v1.json": {
+      "sha256": "491292254016d98dae533fbfdc9e897071af37b1fe8460e5880e927ea30b41a3",
+      "bytes": 1289
+    },
+    "scripts/run_seeded_reproducibility.py": {
+      "sha256": "7b05dbd9f90f54a8b9f413279ecee4ca68700175e08e892a01a8ceaf4c6ce1c6",
+      "bytes": 11175
+    },
+    "scripts/evaluate_cityflow.py": {
+      "sha256": "9e946773c826906ac7ac6ee8d3a6ec0171349e7c8bf8b6ab52ab887b886aaad7",
+      "bytes": 13550
+    },
+    "scripts/train_traffic_qwen.py": {
+      "sha256": "fe382639e1880f4cce383912b844f74dc63ceea9171589d6050c3557fad21601",
+      "bytes": 10489
+    },
+    "scripts/summarize_reproducibility.py": {
+      "sha256": "1b0e1883126f23508e46aefa7a4bace1b1bc70107d5235770080f21e9f19e806",
+      "bytes": 15712
+    },
+    "data/traffic_qwen/v1_dual_choice/train.jsonl": {
+      "sha256": "26da482a97aafda1369dedd3a9e62e4c1b483d1fe24d8507e186f242d23240aa",
+      "bytes": 2955295
+    },
+    "data/traffic_qwen/v1_dual_choice/validation.jsonl": {
+      "sha256": "e9f65d634ef1fde39bbc1ceb117d00529296c107585b16f332de2a6612e50d13",
+      "bytes": 487140
+    },
+    "data/traffic_qwen/v1_dual_choice/test.jsonl": {
+      "sha256": "90a40a7a6833792ab21fd035306af65a79152fd39ef1a3d899ba60cd212b3e3c",
+      "bytes": 535801
+    }
+  },
+  "local_checkpoint_hashes": {
+    "3407": {
+      "adapter_model.safetensors": "b96d7bdffdc655b8e41ec37a3d3da88c392a15220bc1b57a9948f2a1d4f27240",
+      "joint_head.safetensors": "7c3346501f0a0868aa873b897a9e0a8dbf1f3e75d6aace3994c4791750569f08"
+    },
+    "3408": {
+      "adapter_model.safetensors": "8ee9bad48b4a8c65fe91568cc07bd3dd7fcb996cef3c0c873b41ee2670372e0f",
+      "joint_head.safetensors": "25a1fc3d6821cf8df82cbaeebfc21d941760be99b4b063c704ec07a9f310d4e9"
+    },
+    "3409": {
+      "adapter_model.safetensors": "4e60fa45203a1d857cc109a1637ad329bfdc7421b228599dc615bf3bbc50ab5e",
+      "joint_head.safetensors": "eac5cea51dc95a5e5b0f46697bd99d0a8183f6f23ca356ff02e2b62169f55908"
+    }
+  },
+  "baseline_integrity": {
+    "jevlight_source_sha256": "5902cc14a8b1cfba8e977858325d85c87f3c4fa495ee6a398664da3c2890869a",
+    "project_preserved_copy_sha256": "5902cc14a8b1cfba8e977858325d85c87f3c4fa495ee6a398664da3c2890869a",
+    "identical": true
+  },
+  "quality_checks": {
+    "python_compile": "passed",
+    "unittest_total": 15,
+    "unittest_passed": 13,
+    "unittest_failed": 0,
+    "unittest_skipped": 2
+  },
+  "limitations": [
+    "The non-traffic-trained comparator is the same Qwen3.5/Clef decision architecture with a newly initialized decision head and no traffic LoRA or traffic training.",
+    "Traffic-Qwen is trained by imitation on guarded JevLight decisions; labels are not optimal-action labels.",
+    "All runs use one Jinan demand episode; three seeds do not demonstrate generalization to unseen episodes, cities, or demand profiles.",
+    "Training random seeds are distinct, but the CityFlow engine seeds are drawn from a 0-99 range and can collide; paired arms within a seed are verified identical.",
+    "The two choice outputs include phase and duration. The trained V1 duration policy remains strongly concentrated on 20 seconds."
+  ]
+}
