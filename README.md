@@ -1,3 +1,4 @@
+![Traffic-Qwen traffic control](assets/Traffic-Qwen%20_%20trafic.png)
 # Traffic-Qwen Decision
 
 Traffic-Qwen Decision is a local, non-generative decision controller for adaptive traffic signals. It adapts JevLight CityFlow control to Qwen3.5-0.8B using a 4-bit QLoRA adapter and Clef decision head. One inference emits two typed choice distributions from the same structured state: four phases and six green durations (15, 20, 25, 30, 35, 40 seconds). The CityFlow runner follows JevLight five-second decision ticks and five-second yellow transitions.
