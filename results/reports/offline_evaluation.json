@@ -1,0 +1,4074 @@
+{
+  "status": "completed",
+  "model": "Traffic-Qwen-V1-Dual-Choice",
+  "checkpoint": "models/traffic-qwen-v1-dual-choice",
+  "test_is_heldout_time_segment_same_episode": true,
+  "calibration_split": "validation only",
+  "rows": {
+    "validation": 130,
+    "test": 143
+  },
+  "temperature_fit_seconds": 38.18037922200165,
+  "tasks": {
+    "phase": {
+      "temperature_validation_only": 1.0777691541520114,
+      "before_calibration": {
+        "count": 143,
+        "accuracy": 0.7902097902097902,
+        "balanced_accuracy": 0.7693162492269635,
+        "macro_f1": 0.7755824765168824,
+        "confusion_matrix": [
+          [
+            39,
+            5,
+            3,
+            1
+          ],
+          [
+            4,
+            41,
+            2,
+            2
+          ],
+          [
+            1,
+            4,
+            19,
+            0
+          ],
+          [
+            4,
+            2,
+            2,
+            14
+          ]
+        ],
+        "classes": [
+          "phase_0",
+          "phase_1",
+          "phase_2",
+          "phase_3"
+        ],
+        "brier_score": 0.2611379822812628,
+        "ece": 0.05727042740583013,
+        "log_loss": 0.42741143045287133,
+        "mean_confidence_correct": 0.8762690979751512,
+        "mean_confidence_incorrect": 0.6977331500839649,
+        "calibration_bins": [
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 2,
+            "confidence": 0.49092454245424544,
+            "accuracy": 0.0
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 16,
+            "confidence": 0.5511625664536256,
+            "accuracy": 0.375
+          },
+          {
+            "lower": 0.6000000000000001,
+            "upper": 0.7000000000000001,
+            "count": 8,
+            "confidence": 0.6714676349814264,
+            "accuracy": 0.625
+          },
+          {
+            "lower": 0.7000000000000001,
+            "upper": 0.8,
+            "count": 20,
+            "confidence": 0.7499515223389153,
+            "accuracy": 0.7
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 29,
+            "confidence": 0.8407022664599539,
+            "accuracy": 0.8620689655172413
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 68,
+            "confidence": 0.9617472819349435,
+            "accuracy": 0.9264705882352942
+          }
+        ],
+        "top2_accuracy": 1.0
+      },
+      "after_calibration": {
+        "count": 143,
+        "accuracy": 0.7902097902097902,
+        "balanced_accuracy": 0.7693162492269635,
+        "macro_f1": 0.7755824765168824,
+        "confusion_matrix": [
+          [
+            39,
+            5,
+            3,
+            1
+          ],
+          [
+            4,
+            41,
+            2,
+            2
+          ],
+          [
+            1,
+            4,
+            19,
+            0
+          ],
+          [
+            4,
+            2,
+            2,
+            14
+          ]
+        ],
+        "classes": [
+          "phase_0",
+          "phase_1",
+          "phase_2",
+          "phase_3"
+        ],
+        "brier_score": 0.26024485818228266,
+        "ece": 0.06317020993617117,
+        "log_loss": 0.4264520576029829,
+        "mean_confidence_correct": 0.8631074976918514,
+        "mean_confidence_incorrect": 0.6860263393366973,
+        "calibration_bins": [
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 3,
+            "confidence": 0.4897366141788954,
+            "accuracy": 0.0
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 15,
+            "confidence": 0.5472796083902634,
+            "accuracy": 0.4
+          },
+          {
+            "lower": 0.6000000000000001,
+            "upper": 0.7000000000000001,
+            "count": 12,
+            "confidence": 0.6689146005323683,
+            "accuracy": 0.6666666666666666
+          },
+          {
+            "lower": 0.7000000000000001,
+            "upper": 0.8,
+            "count": 23,
+            "confidence": 0.7575898505695452,
+            "accuracy": 0.6956521739130435
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 33,
+            "confidence": 0.8496757181576916,
+            "accuracy": 0.9090909090909091
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 57,
+            "confidence": 0.9639068944245212,
+            "accuracy": 0.9298245614035088
+          }
+        ],
+        "top2_accuracy": 1.0
+      }
+    },
+    "duration": {
+      "temperature_validation_only": 1.110544715429313,
+      "before_calibration": {
+        "count": 143,
+        "accuracy": 0.972027972027972,
+        "balanced_accuracy": 0.48791297340854145,
+        "macro_f1": 0.4888288288288288,
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            19,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            72,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            3,
+            48
+          ]
+        ],
+        "classes": [
+          "15",
+          "20",
+          "25",
+          "30",
+          "35",
+          "40"
+        ],
+        "brier_score": 0.04747639508281622,
+        "ece": 0.010462022994310807,
+        "log_loss": 0.10489932024059806,
+        "mean_confidence_correct": 0.9749580296295247,
+        "mean_confidence_incorrect": 0.819354949504916,
+        "calibration_bins": [
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 2,
+            "confidence": 0.5245499999997332,
+            "accuracy": 0.5
+          },
+          {
+            "lower": 0.6000000000000001,
+            "upper": 0.7000000000000001,
+            "count": 1,
+            "confidence": 0.6707329267073292,
+            "accuracy": 1.0
+          },
+          {
+            "lower": 0.7000000000000001,
+            "upper": 0.8,
+            "count": 2,
+            "confidence": 0.739762693730627,
+            "accuracy": 1.0
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 3,
+            "confidence": 0.8529278773450418,
+            "accuracy": 0.6666666666666666
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 135,
+            "confidence": 0.9854699553357069,
+            "accuracy": 0.9851851851851852
+          }
+        ],
+        "accuracy_within_5_seconds": 1.0,
+        "mae_seconds": 0.13986013986013987
+      },
+      "after_calibration": {
+        "count": 143,
+        "accuracy": 0.972027972027972,
+        "balanced_accuracy": 0.48791297340854145,
+        "macro_f1": 0.4888288288288288,
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            19,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            72,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            3,
+            48
+          ]
+        ],
+        "classes": [
+          "15",
+          "20",
+          "25",
+          "30",
+          "35",
+          "40"
+        ],
+        "brier_score": 0.04776562267766707,
+        "ece": 0.012864966176871395,
+        "log_loss": 0.10615757342818748,
+        "mean_confidence_correct": 0.967264987979151,
+        "mean_confidence_incorrect": 0.8065098583171839,
+        "calibration_bins": [
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 2,
+            "confidence": 0.5215694598235352,
+            "accuracy": 0.5
+          },
+          {
+            "lower": 0.6000000000000001,
+            "upper": 0.7000000000000001,
+            "count": 1,
+            "confidence": 0.6537461724056582,
+            "accuracy": 1.0
+          },
+          {
+            "lower": 0.7000000000000001,
+            "upper": 0.8,
+            "count": 3,
+            "confidence": 0.7382141810615268,
+            "accuracy": 0.6666666666666666
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 5,
+            "confidence": 0.8763823558466569,
+            "accuracy": 1.0
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 132,
+            "confidence": 0.9801699496053038,
+            "accuracy": 0.9848484848484849
+          }
+        ],
+        "accuracy_within_5_seconds": 1.0,
+        "mae_seconds": 0.13986013986013987
+      }
+    }
+  },
+  "combined_exact_outcomes": {
+    "both_exact": 110,
+    "duration_only": 29,
+    "phase_only": 3,
+    "neither": 1
+  },
+  "per_intersection": {
+    "intersection_1_1": {
+      "count": 19,
+      "phase_accuracy": 0.7368421052631579,
+      "duration_accuracy": 1.0
+    },
+    "intersection_1_2": {
+      "count": 10,
+      "phase_accuracy": 0.9,
+      "duration_accuracy": 1.0
+    },
+    "intersection_1_3": {
+      "count": 12,
+      "phase_accuracy": 0.75,
+      "duration_accuracy": 1.0
+    },
+    "intersection_2_1": {
+      "count": 11,
+      "phase_accuracy": 1.0,
+      "duration_accuracy": 0.7272727272727273
+    },
+    "intersection_2_2": {
+      "count": 12,
+      "phase_accuracy": 0.6666666666666666,
+      "duration_accuracy": 1.0
+    },
+    "intersection_2_3": {
+      "count": 11,
+      "phase_accuracy": 0.8181818181818182,
+      "duration_accuracy": 0.9090909090909091
+    },
+    "intersection_3_1": {
+      "count": 12,
+      "phase_accuracy": 0.75,
+      "duration_accuracy": 1.0
+    },
+    "intersection_3_2": {
+      "count": 11,
+      "phase_accuracy": 0.8181818181818182,
+      "duration_accuracy": 1.0
+    },
+    "intersection_3_3": {
+      "count": 10,
+      "phase_accuracy": 0.8,
+      "duration_accuracy": 1.0
+    },
+    "intersection_4_1": {
+      "count": 12,
+      "phase_accuracy": 0.75,
+      "duration_accuracy": 1.0
+    },
+    "intersection_4_2": {
+      "count": 12,
+      "phase_accuracy": 0.8333333333333334,
+      "duration_accuracy": 1.0
+    },
+    "intersection_4_3": {
+      "count": 11,
+      "phase_accuracy": 0.7272727272727273,
+      "duration_accuracy": 1.0
+    }
+  },
+  "congestion_bins": {
+    "low_0_5": {
+      "count": 0,
+      "phase_accuracy": null,
+      "duration_accuracy": null
+    },
+    "medium_5_20": {
+      "count": 81,
+      "phase_accuracy": 0.8024691358024691,
+      "duration_accuracy": 0.9629629629629629
+    },
+    "high_20_plus": {
+      "count": 62,
+      "phase_accuracy": 0.7741935483870968,
+      "duration_accuracy": 0.9838709677419355
+    }
+  },
+  "test_predictions": [
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0916,
+        "phase_1": 0.0074,
+        "phase_2": 0.0608,
+        "phase_3": 0.8403
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.0003,
+        "30": 0.0003,
+        "35": 0.9944,
+        "40": 0.004
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3130,
+      "queue_total": 8.0,
+      "calibrated_phase_confidence": 0.8144944754669426,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9897197081715924,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.003,
+        "phase_1": 0.9839,
+        "phase_2": 0.012,
+        "phase_3": 0.0011
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0021,
+        "25": 0.0003,
+        "30": 0.0001,
+        "35": 0.0013,
+        "40": 0.9961
+      },
+      "intersection_id": "intersection_4_3",
+      "simulation_time_seconds": 3135,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.9773079939128753,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9924592840646423,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0067,
+        "phase_1": 0.8176,
+        "phase_2": 0.1744,
+        "phase_3": 0.0014
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0021,
+        "25": 0.0011,
+        "30": 0.0004,
+        "35": 0.9871,
+        "40": 0.0091
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3140,
+      "queue_total": 30.0,
+      "calibrated_phase_confidence": 0.7982339028298513,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9785202425095396,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0026,
+        "phase_1": 0.0022,
+        "phase_2": 0.5998,
+        "phase_3": 0.3955
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.001,
+        "25": 0.0002,
+        "30": 0.0003,
+        "35": 0.9908,
+        "40": 0.0076
+      },
+      "intersection_id": "intersection_2_3",
+      "simulation_time_seconds": 3140,
+      "queue_total": 20.0,
+      "calibrated_phase_confidence": 0.5912198657107942,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9843849597242699,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.9907,
+        "phase_1": 0.0036,
+        "phase_2": 0.0045,
+        "phase_3": 0.0012
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9891,
+        "25": 0.0003,
+        "30": 0.0001,
+        "35": 0.0005,
+        "40": 0.0098
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3145,
+      "queue_total": 20.0,
+      "calibrated_phase_confidence": 0.986076306790158,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9823713410938508,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.5992,
+        "phase_1": 0.3991,
+        "phase_2": 0.0011,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.9962,
+        "40": 0.0029
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3145,
+      "queue_total": 24.0,
+      "calibrated_phase_confidence": 0.591570481820897,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9928067258110971,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0038,
+        "phase_1": 0.9904,
+        "phase_2": 0.0007,
+        "phase_3": 0.005
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0021,
+        "25": 0.0007,
+        "30": 0.0002,
+        "35": 0.0011,
+        "40": 0.9958
+      },
+      "intersection_id": "intersection_3_2",
+      "simulation_time_seconds": 3145,
+      "queue_total": 22.0,
+      "calibrated_phase_confidence": 0.9858829009544189,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.991829910622759,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0034,
+        "phase_1": 0.0056,
+        "phase_2": 0.9883,
+        "phase_3": 0.0027
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0011,
+        "25": 0.0003,
+        "30": 0.0003,
+        "35": 0.9919,
+        "40": 0.0062
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3145,
+      "queue_total": 15.0,
+      "calibrated_phase_confidence": 0.9827110418103118,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9860480888088408,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9959,
+        "phase_1": 0.0016,
+        "phase_2": 0.0016,
+        "phase_3": 0.001
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0001,
+        "30": 0.0002,
+        "35": 0.9945,
+        "40": 0.0045
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3155,
+      "queue_total": 24.0,
+      "calibrated_phase_confidence": 0.9932814839159728,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.99030796296071,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0074,
+        "phase_1": 0.9913,
+        "phase_2": 0.0007,
+        "phase_3": 0.0005
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0014,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9779,
+        "40": 0.0202
+      },
+      "intersection_id": "intersection_2_1",
+      "simulation_time_seconds": 3155,
+      "queue_total": 12.0,
+      "calibrated_phase_confidence": 0.9874655111829517,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9667918148880131,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.9506,
+        "phase_1": 0.0475,
+        "phase_2": 0.0008,
+        "phase_3": 0.0011
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0003,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0005,
+        "40": 0.9988
+      },
+      "intersection_id": "intersection_3_3",
+      "simulation_time_seconds": 3160,
+      "queue_total": 36.0,
+      "calibrated_phase_confidence": 0.938688064547033,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9972990595795193,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.1329,
+        "phase_1": 0.8632,
+        "phase_2": 0.0034,
+        "phase_3": 0.0004
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0008,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.0003,
+        "40": 0.9984
+      },
+      "intersection_id": "intersection_1_2",
+      "simulation_time_seconds": 3165,
+      "queue_total": 36.0,
+      "calibrated_phase_confidence": 0.8453824208031505,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9965236114980436,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.0036,
+        "phase_1": 0.022,
+        "phase_2": 0.803,
+        "phase_3": 0.1714
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.8751,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0022,
+        "40": 0.1222
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3170,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.780791502124411,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.8506847515698517,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.6795,
+        "phase_1": 0.3176,
+        "phase_2": 0.002,
+        "phase_3": 0.0009
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.0001,
+        "30": 0.0002,
+        "35": 0.9971,
+        "40": 0.0016
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3170,
+      "queue_total": 24.0,
+      "calibrated_phase_confidence": 0.6664936524021098,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9942056031352444,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.211,
+        "phase_1": 0.7875,
+        "phase_2": 0.0009,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.001,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.9931,
+        "40": 0.0052
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3180,
+      "queue_total": 36.0,
+      "calibrated_phase_confidence": 0.7705403949173705,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9879159779368105,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0018,
+        "phase_1": 0.2996,
+        "phase_2": 0.6979,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0023,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.9872,
+        "40": 0.0099
+      },
+      "intersection_id": "intersection_2_3",
+      "simulation_time_seconds": 3180,
+      "queue_total": 18.0,
+      "calibrated_phase_confidence": 0.6841377588644625,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9789319314043576,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0054,
+        "phase_1": 0.0015,
+        "phase_2": 0.9915,
+        "phase_3": 0.0016
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0016,
+        "25": 0.0004,
+        "30": 0.0001,
+        "35": 0.0008,
+        "40": 0.997
+      },
+      "intersection_id": "intersection_4_3",
+      "simulation_time_seconds": 3180,
+      "queue_total": 10.0,
+      "calibrated_phase_confidence": 0.9872479411763416,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9939844887530032,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9933,
+        "phase_1": 0.0025,
+        "phase_2": 0.0033,
+        "phase_3": 0.0008
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9944,
+        "40": 0.0043
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3185,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.9898657535496708,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9896657239477293,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0028,
+        "phase_1": 0.7663,
+        "phase_2": 0.0029,
+        "phase_3": 0.228
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0027,
+        "25": 0.0004,
+        "30": 0.0003,
+        "35": 0.9714,
+        "40": 0.0251
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3185,
+      "queue_total": 14.0,
+      "calibrated_phase_confidence": 0.7485764998075253,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9578396538911641,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.2394,
+        "phase_1": 0.0068,
+        "phase_2": 0.0024,
+        "phase_3": 0.7513
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0007,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0007,
+        "40": 0.9982
+      },
+      "intersection_id": "intersection_3_2",
+      "simulation_time_seconds": 3190,
+      "queue_total": 25.0,
+      "calibrated_phase_confidence": 0.7333502295802721,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9961562520261903,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.0368,
+        "phase_1": 0.8237,
+        "phase_2": 0.0005,
+        "phase_3": 0.139
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9935,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0006,
+        "40": 0.0055
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3195,
+      "queue_total": 20.0,
+      "calibrated_phase_confidence": 0.8007592243354535,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9886091452525824,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0028,
+        "phase_1": 0.0044,
+        "phase_2": 0.9056,
+        "phase_3": 0.0872
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0012,
+        "25": 0.0002,
+        "30": 0.0003,
+        "35": 0.9859,
+        "40": 0.0123
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3195,
+      "queue_total": 11.0,
+      "calibrated_phase_confidence": 0.8882318682523966,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9774377586144609,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.7895,
+        "phase_1": 0.0035,
+        "phase_2": 0.2052,
+        "phase_3": 0.0018
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0006,
+        "25": 0.0002,
+        "30": 0.0004,
+        "35": 0.9828,
+        "40": 0.0159
+      },
+      "intersection_id": "intersection_2_1",
+      "simulation_time_seconds": 3195,
+      "queue_total": 9.0,
+      "calibrated_phase_confidence": 0.7712827043784346,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9734451359276572,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0025,
+        "phase_1": 0.9884,
+        "phase_2": 0.0018,
+        "phase_3": 0.0072
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0016,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.0025,
+        "40": 0.9953
+      },
+      "intersection_id": "intersection_3_3",
+      "simulation_time_seconds": 3205,
+      "queue_total": 23.0,
+      "calibrated_phase_confidence": 0.9831336862015458,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9910767687776914,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.9639,
+        "phase_1": 0.002,
+        "phase_2": 0.0327,
+        "phase_3": 0.0015
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0005,
+        "40": 0.9986
+      },
+      "intersection_id": "intersection_1_2",
+      "simulation_time_seconds": 3210,
+      "queue_total": 36.0,
+      "calibrated_phase_confidence": 0.9532635324924204,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9969074975745835,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9781,
+        "phase_1": 0.0017,
+        "phase_2": 0.0194,
+        "phase_3": 0.0008
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0004,
+        "25": 0.0001,
+        "30": 0.0002,
+        "35": 0.9951,
+        "40": 0.0041
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3210,
+      "queue_total": 23.0,
+      "calibrated_phase_confidence": 0.9704643664742548,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9911152268237595,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.8041,
+        "phase_1": 0.0102,
+        "phase_2": 0.0022,
+        "phase_3": 0.1835
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9714,
+        "25": 0.0005,
+        "30": 0.0001,
+        "35": 0.0006,
+        "40": 0.0273
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3220,
+      "queue_total": 17.0,
+      "calibrated_phase_confidence": 0.7840358131084737,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9587736888889636,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9952,
+        "phase_1": 0.0026,
+        "phase_2": 0.0014,
+        "phase_3": 0.0008
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9926,
+        "40": 0.0063
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3220,
+      "queue_total": 18.0,
+      "calibrated_phase_confidence": 0.9924411242848964,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9873937008812006,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.1442,
+        "phase_1": 0.8552,
+        "phase_2": 0.0003,
+        "phase_3": 0.0003
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0006,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9539,
+        "40": 0.0451
+      },
+      "intersection_id": "intersection_2_3",
+      "simulation_time_seconds": 3220,
+      "queue_total": 21.0,
+      "calibrated_phase_confidence": 0.8382423796192705,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.937552357591642,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0053,
+        "phase_1": 0.0068,
+        "phase_2": 0.7015,
+        "phase_3": 0.2863
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.002,
+        "25": 0.0003,
+        "30": 0.0005,
+        "35": 0.9948,
+        "40": 0.0023
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3225,
+      "queue_total": 7.0,
+      "calibrated_phase_confidence": 0.6850804051044554,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9901399681205996,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.004,
+        "phase_1": 0.9937,
+        "phase_2": 0.0016,
+        "phase_3": 0.0007
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0031,
+        "25": 0.0013,
+        "30": 0.0002,
+        "35": 0.9928,
+        "40": 0.0025
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3225,
+      "queue_total": 13.0,
+      "calibrated_phase_confidence": 0.9903508135611603,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9868057600351734,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.1343,
+        "phase_1": 0.01,
+        "phase_2": 0.0022,
+        "phase_3": 0.8536
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0018,
+        "25": 0.0003,
+        "30": 0.0001,
+        "35": 0.054,
+        "40": 0.9436
+      },
+      "intersection_id": "intersection_4_3",
+      "simulation_time_seconds": 3225,
+      "queue_total": 10.0,
+      "calibrated_phase_confidence": 0.8333996108556692,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9251767983299278,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9265,
+        "phase_1": 0.053,
+        "phase_2": 0.002,
+        "phase_3": 0.0186
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0006,
+        "25": 0.0001,
+        "30": 0.0003,
+        "35": 0.9869,
+        "40": 0.012
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3235,
+      "queue_total": 20.0,
+      "calibrated_phase_confidence": 0.9088433924032415,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9791275582727068,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0028,
+        "phase_1": 0.5121,
+        "phase_2": 0.4841,
+        "phase_3": 0.001
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0012,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.8021,
+        "40": 0.1963
+      },
+      "intersection_id": "intersection_2_1",
+      "simulation_time_seconds": 3235,
+      "queue_total": 11.0,
+      "calibrated_phase_confidence": 0.5101541829584133,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.7776993876658286,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.003,
+        "phase_1": 0.805,
+        "phase_2": 0.0015,
+        "phase_3": 0.1905
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0018,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.0025,
+        "40": 0.9952
+      },
+      "intersection_id": "intersection_3_2",
+      "simulation_time_seconds": 3235,
+      "queue_total": 22.0,
+      "calibrated_phase_confidence": 0.7867248445524583,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9907408844563226,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.9847,
+        "phase_1": 0.0117,
+        "phase_2": 0.0027,
+        "phase_3": 0.0008
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9846,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0005,
+        "40": 0.0145
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3245,
+      "queue_total": 22.0,
+      "calibrated_phase_confidence": 0.978555134221751,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9761125396349282,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0271,
+        "phase_1": 0.002,
+        "phase_2": 0.0618,
+        "phase_3": 0.9091
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0036,
+        "25": 0.0005,
+        "30": 0.0002,
+        "35": 0.0028,
+        "40": 0.9929
+      },
+      "intersection_id": "intersection_3_3",
+      "simulation_time_seconds": 3250,
+      "queue_total": 17.0,
+      "calibrated_phase_confidence": 0.8893912146717424,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9869753344180783,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0038,
+        "phase_1": 0.8939,
+        "phase_2": 0.1017,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0007,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9317,
+        "40": 0.0671
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3250,
+      "queue_total": 27.0,
+      "calibrated_phase_confidence": 0.8767842130648675,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9120941440511967,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0028,
+        "phase_1": 0.5376,
+        "phase_2": 0.458,
+        "phase_3": 0.0016
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0017,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0069,
+        "40": 0.9909
+      },
+      "intersection_id": "intersection_1_2",
+      "simulation_time_seconds": 3255,
+      "queue_total": 26.0,
+      "calibrated_phase_confidence": 0.5336229660541998,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9846146185922382,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0101,
+        "phase_1": 0.9704,
+        "phase_2": 0.0137,
+        "phase_3": 0.0058
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0018,
+        "25": 0.0003,
+        "30": 0.0003,
+        "35": 0.995,
+        "40": 0.0025
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3260,
+      "queue_total": 7.0,
+      "calibrated_phase_confidence": 0.9594020733856382,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9905363962891466,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9736,
+        "phase_1": 0.0043,
+        "phase_2": 0.0114,
+        "phase_3": 0.0106
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9903,
+        "40": 0.0087
+      },
+      "intersection_id": "intersection_2_3",
+      "simulation_time_seconds": 3260,
+      "queue_total": 23.0,
+      "calibrated_phase_confidence": 0.9636165080968772,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9839190296356266,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.003,
+        "phase_1": 0.9009,
+        "phase_2": 0.0006,
+        "phase_3": 0.0955
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0333,
+        "25": 0.0002,
+        "30": 0.0004,
+        "35": 0.9585,
+        "40": 0.0076
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3265,
+      "queue_total": 22.0,
+      "calibrated_phase_confidence": 0.8843337846717092,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9407131536553314,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.8537,
+        "phase_1": 0.0063,
+        "phase_2": 0.138,
+        "phase_3": 0.002
+      },
+      "duration_probabilities": {
+        "15": 0.0002,
+        "20": 0.0027,
+        "25": 0.0006,
+        "30": 0.0017,
+        "35": 0.9341,
+        "40": 0.0608
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3265,
+      "queue_total": 9.0,
+      "calibrated_phase_confidence": 0.8343697376792082,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9125375805429827,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.0036,
+        "phase_1": 0.9675,
+        "phase_2": 0.0283,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9616,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.0013,
+        "40": 0.0365
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3270,
+      "queue_total": 18.0,
+      "calibrated_phase_confidence": 0.9575159428093979,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9464173203777024,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.064,
+        "phase_1": 0.9043,
+        "phase_2": 0.0311,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0016,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0059,
+        "40": 0.9922
+      },
+      "intersection_id": "intersection_4_3",
+      "simulation_time_seconds": 3270,
+      "queue_total": 17.0,
+      "calibrated_phase_confidence": 0.8844396662082593,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9862553031441867,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9494,
+        "phase_1": 0.0031,
+        "phase_2": 0.004,
+        "phase_3": 0.0436
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0006,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9737,
+        "40": 0.0253
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3275,
+      "queue_total": 29.0,
+      "calibrated_phase_confidence": 0.9358534113378343,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9616617530300492,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0197,
+        "phase_1": 0.0021,
+        "phase_2": 0.9697,
+        "phase_3": 0.0085
+      },
+      "duration_probabilities": {
+        "15": 0.0,
+        "20": 0.0008,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.5337,
+        "40": 0.4652
+      },
+      "intersection_id": "intersection_2_1",
+      "simulation_time_seconds": 3280,
+      "queue_total": 13.0,
+      "calibrated_phase_confidence": 0.9591220343461668,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.5297236021365666,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.9709,
+        "phase_1": 0.0045,
+        "phase_2": 0.0048,
+        "phase_3": 0.0198
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0008,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0005,
+        "40": 0.9983
+      },
+      "intersection_id": "intersection_3_2",
+      "simulation_time_seconds": 3280,
+      "queue_total": 30.0,
+      "calibrated_phase_confidence": 0.9605323982132749,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9963482045263989,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.1643,
+        "phase_1": 0.0022,
+        "phase_2": 0.8322,
+        "phase_3": 0.0012
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0006,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9955,
+        "40": 0.0034
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3290,
+      "queue_total": 19.0,
+      "calibrated_phase_confidence": 0.8141221778162685,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9916102904357632,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.265,
+        "phase_1": 0.003,
+        "phase_2": 0.731,
+        "phase_3": 0.0011
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9897,
+        "25": 0.0003,
+        "30": 0.0001,
+        "35": 0.0007,
+        "40": 0.0092
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3295,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.7150201864361178,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9828503368975636,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.2144,
+        "phase_1": 0.0293,
+        "phase_2": 0.7556,
+        "phase_3": 0.0008
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0016,
+        "25": 0.0003,
+        "30": 0.0001,
+        "35": 0.0007,
+        "40": 0.9971
+      },
+      "intersection_id": "intersection_3_3",
+      "simulation_time_seconds": 3295,
+      "queue_total": 19.0,
+      "calibrated_phase_confidence": 0.734479329686066,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9943647826137822,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.7754,
+        "phase_1": 0.0051,
+        "phase_2": 0.2106,
+        "phase_3": 0.0088
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0012,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0006,
+        "40": 0.9978
+      },
+      "intersection_id": "intersection_1_2",
+      "simulation_time_seconds": 3300,
+      "queue_total": 38.0,
+      "calibrated_phase_confidence": 0.7555632610544095,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9954451850472773,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9871,
+        "phase_1": 0.0049,
+        "phase_2": 0.0034,
+        "phase_3": 0.0045
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0011,
+        "25": 0.0002,
+        "30": 0.0003,
+        "35": 0.9943,
+        "40": 0.004
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3300,
+      "queue_total": 19.0,
+      "calibrated_phase_confidence": 0.9811695432119835,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9895686489393053,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0018,
+        "phase_1": 0.0168,
+        "phase_2": 0.3837,
+        "phase_3": 0.5977
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0016,
+        "25": 0.0004,
+        "30": 0.0002,
+        "35": 0.9898,
+        "40": 0.0079
+      },
+      "intersection_id": "intersection_2_3",
+      "simulation_time_seconds": 3300,
+      "queue_total": 17.0,
+      "calibrated_phase_confidence": 0.5869325083401827,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9827258172451216,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0734,
+        "phase_1": 0.0044,
+        "phase_2": 0.0013,
+        "phase_3": 0.9209
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0008,
+        "25": 0.0002,
+        "30": 0.0003,
+        "35": 0.9737,
+        "40": 0.0249
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3305,
+      "queue_total": 11.0,
+      "calibrated_phase_confidence": 0.9050126880540675,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9616075323385486,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0027,
+        "phase_1": 0.043,
+        "phase_2": 0.9534,
+        "phase_3": 0.0009
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0011,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.9903,
+        "40": 0.008
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3305,
+      "queue_total": 5.0,
+      "calibrated_phase_confidence": 0.9413641875531481,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9836334967301255,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9532,
+        "phase_1": 0.0131,
+        "phase_2": 0.0328,
+        "phase_3": 0.0009
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0004,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.9954,
+        "40": 0.0037
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3315,
+      "queue_total": 36.0,
+      "calibrated_phase_confidence": 0.9397015453786572,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9917351444863212,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.002,
+        "phase_1": 0.5435,
+        "phase_2": 0.4534,
+        "phase_3": 0.001
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0021,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0017,
+        "40": 0.9958
+      },
+      "intersection_id": "intersection_4_3",
+      "simulation_time_seconds": 3315,
+      "queue_total": 19.0,
+      "calibrated_phase_confidence": 0.5394856105008543,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9919804068135523,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.0035,
+        "phase_1": 0.0635,
+        "phase_2": 0.9324,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9839,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.0008,
+        "40": 0.0148
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3320,
+      "queue_total": 12.0,
+      "calibrated_phase_confidence": 0.9179500255285746,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9747505825873635,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.7579,
+        "phase_1": 0.0071,
+        "phase_2": 0.0011,
+        "phase_3": 0.2339
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0006,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.017,
+        "40": 0.982
+      },
+      "intersection_id": "intersection_2_1",
+      "simulation_time_seconds": 3325,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.7399803606115756,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.972589490628972,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.825,
+        "phase_1": 0.173,
+        "phase_2": 0.0015,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0004,
+        "25": 0.0001,
+        "30": 0.0001,
+        "35": 0.0005,
+        "40": 0.9987
+      },
+      "intersection_id": "intersection_3_2",
+      "simulation_time_seconds": 3325,
+      "queue_total": 42.0,
+      "calibrated_phase_confidence": 0.8072271994935546,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9973166186797142,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.2984,
+        "phase_1": 0.7003,
+        "phase_2": 0.0005,
+        "phase_3": 0.0009
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0006,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.7334,
+        "40": 0.2655
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3330,
+      "queue_total": 31.0,
+      "calibrated_phase_confidence": 0.6866065667699204,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.7123684949670404,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0057,
+        "phase_1": 0.9916,
+        "phase_2": 0.0013,
+        "phase_3": 0.0014
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0012,
+        "25": 0.0003,
+        "30": 0.0003,
+        "35": 0.9823,
+        "40": 0.0159
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3340,
+      "queue_total": 10.0,
+      "calibrated_phase_confidence": 0.9874357324026294,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9723799765269426,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0026,
+        "phase_1": 0.4389,
+        "phase_2": 0.5579,
+        "phase_3": 0.0007
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0014,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.9481,
+        "40": 0.0499
+      },
+      "intersection_id": "intersection_2_3",
+      "simulation_time_seconds": 3340,
+      "queue_total": 15.0,
+      "calibrated_phase_confidence": 0.5526893765132762,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.930371611768461,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0023,
+        "phase_1": 0.5096,
+        "phase_2": 0.4876,
+        "phase_3": 0.0005
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0012,
+        "25": 0.0003,
+        "30": 0.0001,
+        "35": 0.0005,
+        "40": 0.9978
+      },
+      "intersection_id": "intersection_3_3",
+      "simulation_time_seconds": 3340,
+      "queue_total": 18.0,
+      "calibrated_phase_confidence": 0.5080882210129709,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9954296543477532,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.1642,
+        "phase_1": 0.8349,
+        "phase_2": 0.0004,
+        "phase_3": 0.0005
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9915,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0008,
+        "40": 0.0073
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3345,
+      "queue_total": 22.0,
+      "calibrated_phase_confidence": 0.8176536546887062,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9855919420011462,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0026,
+        "phase_1": 0.2061,
+        "phase_2": 0.7474,
+        "phase_3": 0.0439
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.001,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0007,
+        "40": 0.9979
+      },
+      "intersection_id": "intersection_1_2",
+      "simulation_time_seconds": 3345,
+      "queue_total": 27.0,
+      "calibrated_phase_confidence": 0.7246794594712495,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.99561231229031,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.6629,
+        "phase_1": 0.3347,
+        "phase_2": 0.0015,
+        "phase_3": 0.001
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0004,
+        "25": 0.0003,
+        "30": 0.0003,
+        "35": 0.9909,
+        "40": 0.0081
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3345,
+      "queue_total": 17.0,
+      "calibrated_phase_confidence": 0.6508946856941592,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9845644071636891,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0031,
+        "phase_1": 0.994,
+        "phase_2": 0.0008,
+        "phase_3": 0.0021
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.001,
+        "25": 0.0002,
+        "30": 0.0003,
+        "35": 0.9786,
+        "40": 0.0198
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3345,
+      "queue_total": 12.0,
+      "calibrated_phase_confidence": 0.9907167281856492,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.967794990901918,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0029,
+        "phase_1": 0.8114,
+        "phase_2": 0.1851,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9915,
+        "40": 0.0071
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3355,
+      "queue_total": 22.0,
+      "calibrated_phase_confidence": 0.7933947696945111,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9854896459089691,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0024,
+        "phase_1": 0.9798,
+        "phase_2": 0.0007,
+        "phase_3": 0.0171
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0019,
+        "25": 0.0004,
+        "30": 0.0001,
+        "35": 0.0015,
+        "40": 0.996
+      },
+      "intersection_id": "intersection_4_3",
+      "simulation_time_seconds": 3360,
+      "queue_total": 23.0,
+      "calibrated_phase_confidence": 0.9724238333989629,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9922500712991671,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.0027,
+        "phase_1": 0.9905,
+        "phase_2": 0.0004,
+        "phase_3": 0.0064
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9833,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.0117,
+        "40": 0.0046
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3370,
+      "queue_total": 19.0,
+      "calibrated_phase_confidence": 0.9860178421546784,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9730680024945013,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0041,
+        "phase_1": 0.2899,
+        "phase_2": 0.0079,
+        "phase_3": 0.6981
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0024,
+        "25": 0.0005,
+        "30": 0.0002,
+        "35": 0.0032,
+        "40": 0.9936
+      },
+      "intersection_id": "intersection_2_1",
+      "simulation_time_seconds": 3370,
+      "queue_total": 22.0,
+      "calibrated_phase_confidence": 0.6818481117460703,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.98824483169788,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.005,
+        "phase_1": 0.9915,
+        "phase_2": 0.0029,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0031,
+        "25": 0.0004,
+        "30": 0.0001,
+        "35": 0.002,
+        "40": 0.9942
+      },
+      "intersection_id": "intersection_3_2",
+      "simulation_time_seconds": 3370,
+      "queue_total": 27.0,
+      "calibrated_phase_confidence": 0.9872881132247597,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9894630634465921,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0028,
+        "phase_1": 0.9952,
+        "phase_2": 0.0005,
+        "phase_3": 0.0015
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0014,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9926,
+        "40": 0.0054
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3370,
+      "queue_total": 20.0,
+      "calibrated_phase_confidence": 0.9924806581155584,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9871236849443726,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.5648,
+        "phase_1": 0.0137,
+        "phase_2": 0.3778,
+        "phase_3": 0.0437
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.0008,
+        "30": 0.0003,
+        "35": 0.9958,
+        "40": 0.0022
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3380,
+      "queue_total": 19.0,
+      "calibrated_phase_confidence": 0.5514535443782392,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.991634665316857,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0926,
+        "phase_1": 0.0016,
+        "phase_2": 0.9043,
+        "phase_3": 0.0014
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0004,
+        "25": 0.0001,
+        "30": 0.0001,
+        "35": 0.4839,
+        "40": 0.5154
+      },
+      "intersection_id": "intersection_2_3",
+      "simulation_time_seconds": 3385,
+      "queue_total": 17.0,
+      "calibrated_phase_confidence": 0.8881262324611321,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.513415317510504,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9931,
+        "phase_1": 0.0024,
+        "phase_2": 0.0036,
+        "phase_3": 0.001
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0008,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.8814,
+        "40": 0.1171
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3385,
+      "queue_total": 12.0,
+      "calibrated_phase_confidence": 0.9892885650766748,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.8579489091328865,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.005,
+        "phase_1": 0.9926,
+        "phase_2": 0.0005,
+        "phase_3": 0.0018
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0018,
+        "25": 0.0004,
+        "30": 0.0001,
+        "35": 0.001,
+        "40": 0.9966
+      },
+      "intersection_id": "intersection_3_3",
+      "simulation_time_seconds": 3385,
+      "queue_total": 24.0,
+      "calibrated_phase_confidence": 0.9890120764257827,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9932872689119047,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.2341,
+        "phase_1": 0.0073,
+        "phase_2": 0.0056,
+        "phase_3": 0.753
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0008,
+        "25": 0.0001,
+        "30": 0.0004,
+        "35": 0.9816,
+        "40": 0.017
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3385,
+      "queue_total": 10.0,
+      "calibrated_phase_confidence": 0.7340131077467874,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9718339469269258,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0399,
+        "phase_1": 0.9049,
+        "phase_2": 0.0004,
+        "phase_3": 0.0548
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0023,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0006,
+        "40": 0.9966
+      },
+      "intersection_id": "intersection_1_2",
+      "simulation_time_seconds": 3390,
+      "queue_total": 42.0,
+      "calibrated_phase_confidence": 0.8848428056303165,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9935882347073604,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.9532,
+        "phase_1": 0.0088,
+        "phase_2": 0.0152,
+        "phase_3": 0.0229
+      },
+      "duration_probabilities": {
+        "15": 0.0002,
+        "20": 0.9021,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.0036,
+        "40": 0.0938
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3395,
+      "queue_total": 11.0,
+      "calibrated_phase_confidence": 0.9381898193762582,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.8781867297426054,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.1743,
+        "phase_1": 0.0017,
+        "phase_2": 0.823,
+        "phase_3": 0.001
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9938,
+        "40": 0.0049
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3395,
+      "queue_total": 28.0,
+      "calibrated_phase_confidence": 0.8050978483586488,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.988751704014873,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.078,
+        "phase_1": 0.0033,
+        "phase_2": 0.0105,
+        "phase_3": 0.9081
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.0004,
+        "30": 0.0001,
+        "35": 0.0009,
+        "40": 0.9977
+      },
+      "intersection_id": "intersection_4_3",
+      "simulation_time_seconds": 3405,
+      "queue_total": 18.0,
+      "calibrated_phase_confidence": 0.8897270610818256,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9950248603319718,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0049,
+        "phase_1": 0.9936,
+        "phase_2": 0.001,
+        "phase_3": 0.0005
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0013,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.6708,
+        "40": 0.3275
+      },
+      "intersection_id": "intersection_2_1",
+      "simulation_time_seconds": 3410,
+      "queue_total": 20.0,
+      "calibrated_phase_confidence": 0.9903326652527156,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.6537461724056582,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9524,
+        "phase_1": 0.0044,
+        "phase_2": 0.0017,
+        "phase_3": 0.0415
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0007,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9887,
+        "40": 0.0101
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3410,
+      "queue_total": 21.0,
+      "calibrated_phase_confidence": 0.939623152925961,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9815705428024574,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.9842,
+        "phase_1": 0.0019,
+        "phase_2": 0.0128,
+        "phase_3": 0.001
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0024,
+        "40": 0.9967
+      },
+      "intersection_id": "intersection_3_2",
+      "simulation_time_seconds": 3415,
+      "queue_total": 33.0,
+      "calibrated_phase_confidence": 0.9780022562702607,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9936141699903367,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.9219,
+        "phase_1": 0.0155,
+        "phase_2": 0.0605,
+        "phase_3": 0.0021
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9881,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0006,
+        "40": 0.0109
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3420,
+      "queue_total": 15.0,
+      "calibrated_phase_confidence": 0.9041676543665323,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9808501544599856,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0061,
+        "phase_1": 0.0042,
+        "phase_2": 0.7669,
+        "phase_3": 0.2227
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0015,
+        "25": 0.0002,
+        "30": 0.0004,
+        "35": 0.9911,
+        "40": 0.0067
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3420,
+      "queue_total": 11.0,
+      "calibrated_phase_confidence": 0.7480889976665419,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9846333912776652,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0043,
+        "phase_1": 0.0439,
+        "phase_2": 0.9501,
+        "phase_3": 0.0017
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0011,
+        "25": 0.0003,
+        "30": 0.0003,
+        "35": 0.9892,
+        "40": 0.009
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3425,
+      "queue_total": 7.0,
+      "calibrated_phase_confidence": 0.9370415243337408,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9820048492666401,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9094,
+        "phase_1": 0.0771,
+        "phase_2": 0.012,
+        "phase_3": 0.0015
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0004,
+        "25": 0.0001,
+        "30": 0.0002,
+        "35": 0.9942,
+        "40": 0.0049
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3425,
+      "queue_total": 11.0,
+      "calibrated_phase_confidence": 0.8913003724790566,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9898912987540914,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.8767,
+        "phase_1": 0.1133,
+        "phase_2": 0.0018,
+        "phase_3": 0.0083
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0004,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.2531,
+        "40": 0.7462
+      },
+      "intersection_id": "intersection_2_3",
+      "simulation_time_seconds": 3430,
+      "queue_total": 18.0,
+      "calibrated_phase_confidence": 0.8574447387852768,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.7245746605517118,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.9676,
+        "phase_1": 0.0042,
+        "phase_2": 0.0016,
+        "phase_3": 0.0265
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0007,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0008,
+        "40": 0.998
+      },
+      "intersection_id": "intersection_3_3",
+      "simulation_time_seconds": 3430,
+      "queue_total": 15.0,
+      "calibrated_phase_confidence": 0.9573431953286864,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9959723650560852,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.8168,
+        "phase_1": 0.0027,
+        "phase_2": 0.0012,
+        "phase_3": 0.1793
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0006,
+        "40": 0.9981
+      },
+      "intersection_id": "intersection_1_2",
+      "simulation_time_seconds": 3435,
+      "queue_total": 37.0,
+      "calibrated_phase_confidence": 0.7985685492406617,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9959776303515943,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0024,
+        "phase_1": 0.284,
+        "phase_2": 0.713,
+        "phase_3": 0.0005
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0017,
+        "25": 0.0004,
+        "30": 0.0002,
+        "35": 0.995,
+        "40": 0.0026
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3435,
+      "queue_total": 24.0,
+      "calibrated_phase_confidence": 0.6983567039425662,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9905492894516114,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.0027,
+        "phase_1": 0.7426,
+        "phase_2": 0.2536,
+        "phase_3": 0.0011
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9881,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.0012,
+        "40": 0.0101
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3445,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.7262930657000103,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.980483744855956,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9487,
+        "phase_1": 0.0019,
+        "phase_2": 0.0481,
+        "phase_3": 0.0013
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0002,
+        "30": 0.0003,
+        "35": 0.9249,
+        "40": 0.0741
+      },
+      "intersection_id": "intersection_2_1",
+      "simulation_time_seconds": 3450,
+      "queue_total": 19.0,
+      "calibrated_phase_confidence": 0.9361429123043442,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9044563638154369,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0065,
+        "phase_1": 0.8193,
+        "phase_2": 0.0029,
+        "phase_3": 0.1713
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0013,
+        "25": 0.0002,
+        "30": 0.0004,
+        "35": 0.9943,
+        "40": 0.0037
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3450,
+      "queue_total": 18.0,
+      "calibrated_phase_confidence": 0.799588720305995,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9894890622801755,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.5782,
+        "phase_1": 0.0093,
+        "phase_2": 0.4116,
+        "phase_3": 0.0009
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0012,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0007,
+        "40": 0.9976
+      },
+      "intersection_id": "intersection_4_3",
+      "simulation_time_seconds": 3450,
+      "queue_total": 14.0,
+      "calibrated_phase_confidence": 0.5702267919993079,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.995258736043021,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0027,
+        "phase_1": 0.3258,
+        "phase_2": 0.6709,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0013,
+        "25": 0.0002,
+        "30": 0.0003,
+        "35": 0.9915,
+        "40": 0.0067
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3460,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.6582955105203188,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9851719573281567,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0042,
+        "phase_1": 0.9548,
+        "phase_2": 0.0385,
+        "phase_3": 0.0025
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0026,
+        "25": 0.0018,
+        "30": 0.0001,
+        "35": 0.0009,
+        "40": 0.9944
+      },
+      "intersection_id": "intersection_3_2",
+      "simulation_time_seconds": 3460,
+      "queue_total": 21.0,
+      "calibrated_phase_confidence": 0.9421840172838959,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9896673168899992,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0025,
+        "phase_1": 0.9881,
+        "phase_2": 0.0009,
+        "phase_3": 0.0085
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0023,
+        "25": 0.0002,
+        "30": 0.0003,
+        "35": 0.9595,
+        "40": 0.0376
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3465,
+      "queue_total": 13.0,
+      "calibrated_phase_confidence": 0.9827731689862391,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9434755280590307,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0029,
+        "phase_1": 0.4737,
+        "phase_2": 0.0232,
+        "phase_3": 0.5002
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0018,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.9192,
+        "40": 0.0785
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3465,
+      "queue_total": 15.0,
+      "calibrated_phase_confidence": 0.4957755011342672,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.8974714176723073,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.137,
+        "phase_1": 0.0051,
+        "phase_2": 0.8405,
+        "phase_3": 0.0174
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9312,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0015,
+        "40": 0.0669
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3470,
+      "queue_total": 14.0,
+      "calibrated_phase_confidence": 0.818364779510942,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.911195500041102,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0558,
+        "phase_1": 0.9429,
+        "phase_2": 0.0004,
+        "phase_3": 0.001
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.001,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9935,
+        "40": 0.0049
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3475,
+      "queue_total": 32.0,
+      "calibrated_phase_confidence": 0.9301868448440289,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9885716810967686,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0026,
+        "phase_1": 0.642,
+        "phase_2": 0.0019,
+        "phase_3": 0.3535
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0029,
+        "25": 0.0003,
+        "30": 0.0001,
+        "35": 0.0015,
+        "40": 0.9951
+      },
+      "intersection_id": "intersection_2_3",
+      "simulation_time_seconds": 3475,
+      "queue_total": 22.0,
+      "calibrated_phase_confidence": 0.6307633911427784,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9908179540174156,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.005,
+        "phase_1": 0.9082,
+        "phase_2": 0.0027,
+        "phase_3": 0.0842
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0021,
+        "25": 0.0007,
+        "30": 0.0002,
+        "35": 0.0022,
+        "40": 0.9948
+      },
+      "intersection_id": "intersection_3_3",
+      "simulation_time_seconds": 3475,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.8907854211721214,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9899697325478651,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0034,
+        "phase_1": 0.548,
+        "phase_2": 0.0039,
+        "phase_3": 0.4447
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0037,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.0004,
+        "40": 0.9952
+      },
+      "intersection_id": "intersection_1_2",
+      "simulation_time_seconds": 3480,
+      "queue_total": 29.0,
+      "calibrated_phase_confidence": 0.5426108522905351,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9913164634353292,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0027,
+        "phase_1": 0.1688,
+        "phase_2": 0.8272,
+        "phase_3": 0.0013
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0011,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9924,
+        "40": 0.0059
+      },
+      "intersection_id": "intersection_2_1",
+      "simulation_time_seconds": 3490,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.8088675116157542,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9868976348891985,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.8472,
+        "phase_1": 0.0053,
+        "phase_2": 0.0084,
+        "phase_3": 0.1391
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0019,
+        "25": 0.0001,
+        "30": 0.0002,
+        "35": 0.9958,
+        "40": 0.0019
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3490,
+      "queue_total": 24.0,
+      "calibrated_phase_confidence": 0.8265112967893686,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9919769216148828,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.4849,
+        "phase_1": 0.4908,
+        "phase_2": 0.0014,
+        "phase_3": 0.0228
+      },
+      "duration_probabilities": {
+        "15": 0.0002,
+        "20": 0.9789,
+        "25": 0.0003,
+        "30": 0.0002,
+        "35": 0.0011,
+        "40": 0.0194
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3495,
+      "queue_total": 17.0,
+      "calibrated_phase_confidence": 0.48752748485934366,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.967935112520865,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.9146,
+        "phase_1": 0.0829,
+        "phase_2": 0.0011,
+        "phase_3": 0.0015
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0001,
+        "30": 0.0001,
+        "35": 0.0009,
+        "40": 0.9983
+      },
+      "intersection_id": "intersection_4_3",
+      "simulation_time_seconds": 3495,
+      "queue_total": 19.0,
+      "calibrated_phase_confidence": 0.8990022401230943,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9963827532072452,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.8932,
+        "phase_1": 0.0031,
+        "phase_2": 0.1026,
+        "phase_3": 0.0011
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.9977,
+        "40": 0.0013
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3500,
+      "queue_total": 24.0,
+      "calibrated_phase_confidence": 0.8760402754488573,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9954596102345887,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9848,
+        "phase_1": 0.0041,
+        "phase_2": 0.0055,
+        "phase_3": 0.0056
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.001,
+        "25": 0.0003,
+        "30": 0.0004,
+        "35": 0.9938,
+        "40": 0.0044
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3505,
+      "queue_total": 17.0,
+      "calibrated_phase_confidence": 0.977936633713234,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9887301497862206,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.9538,
+        "phase_1": 0.0035,
+        "phase_2": 0.0396,
+        "phase_3": 0.0031
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0016,
+        "40": 0.9971
+      },
+      "intersection_id": "intersection_3_2",
+      "simulation_time_seconds": 3505,
+      "queue_total": 30.0,
+      "calibrated_phase_confidence": 0.9410467346823754,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9942056031352444,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0051,
+        "phase_1": 0.0012,
+        "phase_2": 0.3694,
+        "phase_3": 0.6244
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0008,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.979,
+        "40": 0.0197
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3505,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.6138665789515679,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.968476070143461,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9878,
+        "phase_1": 0.003,
+        "phase_2": 0.0016,
+        "phase_3": 0.0075
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0001,
+        "30": 0.0002,
+        "35": 0.9732,
+        "40": 0.0259
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3515,
+      "queue_total": 23.0,
+      "calibrated_phase_confidence": 0.9823304027529804,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9612929940661218,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.0027,
+        "phase_1": 0.6961,
+        "phase_2": 0.0019,
+        "phase_3": 0.2993
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9866,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0039,
+        "40": 0.009
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3520,
+      "queue_total": 15.0,
+      "calibrated_phase_confidence": 0.6816925581550038,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9780949073491156,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0189,
+        "phase_1": 0.0041,
+        "phase_2": 0.0025,
+        "phase_3": 0.9745
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.001,
+        "30": 0.0001,
+        "35": 0.0041,
+        "40": 0.9938
+      },
+      "intersection_id": "intersection_2_3",
+      "simulation_time_seconds": 3520,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.9652820936648514,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9886813776816996,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.7294,
+        "phase_1": 0.0035,
+        "phase_2": 0.0025,
+        "phase_3": 0.2646
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0025,
+        "40": 0.9962
+      },
+      "intersection_id": "intersection_3_3",
+      "simulation_time_seconds": 3520,
+      "queue_total": 18.0,
+      "calibrated_phase_confidence": 0.7130033458236901,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9927133663734534,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0426,
+        "phase_1": 0.9562,
+        "phase_2": 0.0009,
+        "phase_3": 0.0004
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0017,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.001,
+        "40": 0.9968
+      },
+      "intersection_id": "intersection_1_2",
+      "simulation_time_seconds": 3525,
+      "queue_total": 38.0,
+      "calibrated_phase_confidence": 0.9451315687118892,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9936421055462346,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0818,
+        "phase_1": 0.8256,
+        "phase_2": 0.0016,
+        "phase_3": 0.0911
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0015,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9959,
+        "40": 0.0021
+      },
+      "intersection_id": "intersection_2_1",
+      "simulation_time_seconds": 3530,
+      "queue_total": 13.0,
+      "calibrated_phase_confidence": 0.8003367965996624,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9921046684358206,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.005,
+        "phase_1": 0.7826,
+        "phase_2": 0.0238,
+        "phase_3": 0.1885
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0019,
+        "25": 0.0003,
+        "30": 0.0003,
+        "35": 0.9948,
+        "40": 0.0027
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3530,
+      "queue_total": 12.0,
+      "calibrated_phase_confidence": 0.7603123296546769,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9900478042047667,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0024,
+        "phase_1": 0.5181,
+        "phase_2": 0.4787,
+        "phase_3": 0.0007
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0011,
+        "25": 0.0003,
+        "30": 0.0003,
+        "35": 0.9651,
+        "40": 0.0331
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3540,
+      "queue_total": 19.0,
+      "calibrated_phase_confidence": 0.5159307782141423,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9506926586515141,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0024,
+        "phase_1": 0.7908,
+        "phase_2": 0.0018,
+        "phase_3": 0.205
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0032,
+        "25": 0.0004,
+        "30": 0.0002,
+        "35": 0.0065,
+        "40": 0.9897
+      },
+      "intersection_id": "intersection_4_3",
+      "simulation_time_seconds": 3540,
+      "queue_total": 16.0,
+      "calibrated_phase_confidence": 0.7728587218027397,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9821674657968473,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.0262,
+        "phase_1": 0.0083,
+        "phase_2": 0.001,
+        "phase_3": 0.9645
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9614,
+        "25": 0.0003,
+        "30": 0.0001,
+        "35": 0.0147,
+        "40": 0.0234
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3545,
+      "queue_total": 10.0,
+      "calibrated_phase_confidence": 0.9532275613482986,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9437267265095034,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0061,
+        "phase_1": 0.116,
+        "phase_2": 0.5789,
+        "phase_3": 0.2989
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0022,
+        "25": 0.0004,
+        "30": 0.0005,
+        "35": 0.9816,
+        "40": 0.0152
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3545,
+      "queue_total": 14.0,
+      "calibrated_phase_confidence": 0.561416546527489,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9710767819953967,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.1124,
+        "phase_1": 0.0124,
+        "phase_2": 0.8747,
+        "phase_3": 0.0005
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0006,
+        "25": 0.0001,
+        "30": 0.0002,
+        "35": 0.9962,
+        "40": 0.0029
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3545,
+      "queue_total": 13.0,
+      "calibrated_phase_confidence": 0.8552423406255686,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9926187364985767,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_2",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0063,
+        "phase_1": 0.2656,
+        "phase_2": 0.5454,
+        "phase_3": 0.1827
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0024,
+        "25": 0.0005,
+        "30": 0.0002,
+        "35": 0.0119,
+        "40": 0.985
+      },
+      "intersection_id": "intersection_3_2",
+      "simulation_time_seconds": 3550,
+      "queue_total": 21.0,
+      "calibrated_phase_confidence": 0.5287196051187698,
+      "predicted_phase": "phase_2",
+      "calibrated_duration_confidence": 0.9756166149969617,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0025,
+        "phase_1": 0.0152,
+        "phase_2": 0.0324,
+        "phase_3": 0.9499
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.002,
+        "25": 0.0004,
+        "30": 0.0003,
+        "35": 0.9918,
+        "40": 0.0053
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3555,
+      "queue_total": 13.0,
+      "calibrated_phase_confidence": 0.9353403663583486,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9856650104308585,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.9582,
+        "phase_1": 0.0135,
+        "phase_2": 0.027,
+        "phase_3": 0.0013
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0001,
+        "30": 0.0001,
+        "35": 0.0128,
+        "40": 0.9864
+      },
+      "intersection_id": "intersection_2_3",
+      "simulation_time_seconds": 3565,
+      "queue_total": 15.0,
+      "calibrated_phase_confidence": 0.9453562742495315,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9786307175685564,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0034,
+        "phase_1": 0.1011,
+        "phase_2": 0.0454,
+        "phase_3": 0.8501
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0018,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.0114,
+        "40": 0.9863
+      },
+      "intersection_id": "intersection_3_3",
+      "simulation_time_seconds": 3565,
+      "queue_total": 12.0,
+      "calibrated_phase_confidence": 0.8260277921417256,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9778650244105308,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.2433,
+        "phase_1": 0.7521,
+        "phase_2": 0.003,
+        "phase_3": 0.0016
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9981,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.0009,
+        "40": 0.0005
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3570,
+      "queue_total": 6.0,
+      "calibrated_phase_confidence": 0.7351864669057087,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.995951129700337,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.9795,
+        "phase_1": 0.0021,
+        "phase_2": 0.017,
+        "phase_3": 0.0014
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0004,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0028,
+        "40": 0.9964
+      },
+      "intersection_id": "intersection_1_2",
+      "simulation_time_seconds": 3570,
+      "queue_total": 33.0,
+      "calibrated_phase_confidence": 0.9719245385765162,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9931595108896228,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.9864,
+        "phase_1": 0.0025,
+        "phase_2": 0.0009,
+        "phase_3": 0.0102
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9942,
+        "40": 0.0047
+      },
+      "intersection_id": "intersection_2_1",
+      "simulation_time_seconds": 3570,
+      "queue_total": 20.0,
+      "calibrated_phase_confidence": 0.9805891640740407,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9897885518785637,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.8306,
+        "phase_1": 0.0038,
+        "phase_2": 0.0111,
+        "phase_3": 0.1545
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0009,
+        "25": 0.0002,
+        "30": 0.0002,
+        "35": 0.9905,
+        "40": 0.0082
+      },
+      "intersection_id": "intersection_4_2",
+      "simulation_time_seconds": 3570,
+      "queue_total": 20.0,
+      "calibrated_phase_confidence": 0.8097122425915679,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9839030568136666,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0076,
+        "phase_1": 0.9911,
+        "phase_2": 0.0004,
+        "phase_3": 0.0009
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0005,
+        "25": 0.0003,
+        "30": 0.0003,
+        "35": 0.9873,
+        "40": 0.0115
+      },
+      "intersection_id": "intersection_2_2",
+      "simulation_time_seconds": 3580,
+      "queue_total": 28.0,
+      "calibrated_phase_confidence": 0.9870574784136543,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9795893898189704,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.0391,
+        "phase_1": 0.4678,
+        "phase_2": 0.0021,
+        "phase_3": 0.491
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0008,
+        "25": 0.0002,
+        "30": 0.0003,
+        "35": 0.9585,
+        "40": 0.0401
+      },
+      "intersection_id": "intersection_3_1",
+      "simulation_time_seconds": 3585,
+      "queue_total": 24.0,
+      "calibrated_phase_confidence": 0.4859068565430753,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9429386000374461,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.471,
+        "phase_1": 0.5275,
+        "phase_2": 0.0008,
+        "phase_3": 0.0006
+      },
+      "duration_probabilities": {
+        "15": 0.0002,
+        "20": 0.0009,
+        "25": 0.0002,
+        "30": 0.0003,
+        "35": 0.919,
+        "40": 0.0795
+      },
+      "intersection_id": "intersection_4_1",
+      "simulation_time_seconds": 3585,
+      "queue_total": 22.0,
+      "calibrated_phase_confidence": 0.525072794413878,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.8976199711156342,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_3",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0052,
+        "phase_1": 0.003,
+        "phase_2": 0.2871,
+        "phase_3": 0.7047
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0034,
+        "25": 0.0011,
+        "30": 0.0001,
+        "35": 0.0078,
+        "40": 0.9874
+      },
+      "intersection_id": "intersection_4_3",
+      "simulation_time_seconds": 3585,
+      "queue_total": 15.0,
+      "calibrated_phase_confidence": 0.6889392830950066,
+      "predicted_phase": "phase_3",
+      "calibrated_duration_confidence": 0.9789105153055182,
+      "predicted_duration": "40"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "20",
+      "phase_probabilities": {
+        "phase_0": 0.8993,
+        "phase_1": 0.0037,
+        "phase_2": 0.0953,
+        "phase_3": 0.0017
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.9686,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0103,
+        "40": 0.0206
+      },
+      "intersection_id": "intersection_1_1",
+      "simulation_time_seconds": 3595,
+      "queue_total": 6.0,
+      "calibrated_phase_confidence": 0.8820748030639225,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.953368079584197,
+      "predicted_duration": "20"
+    },
+    {
+      "gold_phase": "phase_0",
+      "gold_duration": "35",
+      "phase_probabilities": {
+        "phase_0": 0.8397,
+        "phase_1": 0.1487,
+        "phase_2": 0.0104,
+        "phase_3": 0.0012
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0096,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.9859,
+        "40": 0.004
+      },
+      "intersection_id": "intersection_1_3",
+      "simulation_time_seconds": 3595,
+      "queue_total": 33.0,
+      "calibrated_phase_confidence": 0.819709825335828,
+      "predicted_phase": "phase_0",
+      "calibrated_duration_confidence": 0.9770968826975591,
+      "predicted_duration": "35"
+    },
+    {
+      "gold_phase": "phase_1",
+      "gold_duration": "40",
+      "phase_probabilities": {
+        "phase_0": 0.0588,
+        "phase_1": 0.9017,
+        "phase_2": 0.0008,
+        "phase_3": 0.0387
+      },
+      "duration_probabilities": {
+        "15": 0.0001,
+        "20": 0.0007,
+        "25": 0.0002,
+        "30": 0.0001,
+        "35": 0.0007,
+        "40": 0.9981
+      },
+      "intersection_id": "intersection_3_2",
+      "simulation_time_seconds": 3595,
+      "queue_total": 36.0,
+      "calibrated_phase_confidence": 0.8812526877619556,
+      "predicted_phase": "phase_1",
+      "calibrated_duration_confidence": 0.9961559065883198,
+      "predicted_duration": "40"
+    }
+  ]
+}

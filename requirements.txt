@@ -1,0 +1,16 @@
+# Direct runtime dependencies; use a CUDA-enabled PyTorch build compatible with the host driver.
+torch==2.14.1
+torchvision==0.29.1
+unsloth==2026.10.2
+transformers==5.17.0
+datasets==4.8.5
+accelerate==1.15.0
+peft==0.21.2
+bitsandbytes==0.50.2
+numpy==2.2.6
+pandas==2.3.3
+matplotlib==3.10.9
+wandb==0.30.0
+tqdm==4.70.1
+laya==0.3.29
+cityflow @ git+https://github.com/cityflow-project/CityFlow.git@81ee0f47659ca66177a71f81676691c58ee89184

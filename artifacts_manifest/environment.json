@@ -1,0 +1,62 @@
+{
+  "base_model": "unsloth/Qwen3.5-0.8B",
+  "base_model_revision_is_proven_training_revision": false,
+  "base_model_revision_observed_during_packaging": "23c69c53358a07516b5827588b3fdb12ae78fd65",
+  "cityflow_source_commit": "81ee0f47659ca66177a71f81676691c58ee89184",
+  "cuda": "13.0",
+  "device": "cuda",
+  "fallback": false,
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "guardrail": false,
+  "jevlight_pinned_commit": "d92caa655e5a7487a49361626673df809eee9129",
+  "model": "models/traffic-qwen-v1-dual-choice",
+  "packages": {
+    "accelerate": null,
+    "bitsandbytes": null,
+    "cityflow": null,
+    "datasets": null,
+    "laya": null,
+    "matplotlib": null,
+    "numpy": null,
+    "pandas": null,
+    "peft": null,
+    "scikit-learn": null,
+    "seaborn": null,
+    "torch": null,
+    "transformers": null,
+    "unsloth": null,
+    "wandb": null
+  },
+  "python": "3.10.22 (main, Oct  1 2026, 20:14:04) [GCC 14.3.0]",
+  "run_counts": 3600,
+  "seed": 3407,
+  "torch": "2.14.1+cu130",
+  "warmup": {
+    "duration": {
+      "answer": "20",
+      "choice": "20",
+      "confidence": 0.9559,
+      "probabilities": {
+        "15": 0.0018,
+        "20": 0.9559,
+        "25": 0.0218,
+        "30": 0.0014,
+        "35": 0.0079,
+        "40": 0.0111
+      },
+      "type": "choice"
+    },
+    "phase": {
+      "answer": "phase_0",
+      "choice": "phase_0",
+      "confidence": 0.5052,
+      "probabilities": {
+        "phase_0": 0.5052,
+        "phase_1": 0.4626,
+        "phase_2": 0.0204,
+        "phase_3": 0.0119
+      },
+      "type": "choice"
+    }
+  }
+}

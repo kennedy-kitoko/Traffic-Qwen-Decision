@@ -1,0 +1,85 @@
+diff --git a/utils/config.py b/utils/config.py
+index 59ddc4b..46dae9c 100644
+--- a/utils/config.py
++++ b/utils/config.py
+@@ -8,6 +8,7 @@ from models.chatgpt import (ChatGPTTLCS_Wait_Time_Forecast, ChatGPTTLCS_Commonse
+ from models.dynamiclight import DynamicLightAgent
+ from models.jev import JevAgent
+ from models.laya_agent import LayaAgent
++from models.traffic_qwen_agent import TrafficQwenAgent
+ 
+ 
+ DIC_AGENTS = {
+@@ -22,6 +23,7 @@ DIC_AGENTS = {
+     "DynamicLight": DynamicLightAgent,
+     "Jev": JevAgent,
+     "Laya": LayaAgent,
++    "TrafficQwen": TrafficQwenAgent,
+ }
+ 
+ DIC_PATH = {
+diff --git a/utils/oneline.py b/utils/oneline.py
+index 4ee2966..cbf3c72 100644
+--- a/utils/oneline.py
++++ b/utils/oneline.py
+@@ -48,7 +48,7 @@ class OneLine:
+                     log_dir=self.dic_agent_conf["LOG_DIR"],
+                     dataset=f"{self.roadnet}-{self.trafficflow}"
+                 )
+-            elif agent_name in {"Jev", "Laya"}:
++            elif agent_name in {"Jev", "Laya", "TrafficQwen"}:
+                 agent = DIC_AGENTS[agent_name](
+                     dic_agent_conf=self.dic_agent_conf,
+                     dic_traffic_env_conf=self.dic_traffic_env_conf,
+@@ -101,7 +101,7 @@ class OneLine:
+ 
+         start_time = time.time()
+         state_action_log = [[] for _ in range(len(state))]
+-        is_structured_signal_agent = self.dic_traffic_env_conf["MODEL_NAME"] in {"Jev", "Laya"}
++        is_structured_signal_agent = self.dic_traffic_env_conf["MODEL_NAME"] in {"Jev", "Laya", "TrafficQwen"}
+         is_shared_network = self.dic_traffic_env_conf["MODEL_NAME"] in {
+             "PressLight", "MPLight", "Colight", "EfficientPressLight",
+             "EfficientMPLight", "EfficientColight", "DynamicLight",
+@@ -154,7 +154,7 @@ class OneLine:
+                 # CityFlow's C++ engine is not thread-safe for simultaneous state
+                 # snapshots.  Local Laya inference is cheap and shares one model,
+                 # so serialize it; hosted Jev requests may remain concurrent.
+-                if self.dic_traffic_env_conf["MODEL_NAME"] == "Laya":
++                if self.dic_traffic_env_conf["MODEL_NAME"] in {"Laya", "TrafficQwen"}:
+                     max_workers = 1
+                 max_workers = max(1, min(max_workers, len(jev_due)))
+                 with ThreadPoolExecutor(max_workers=max_workers) as pool:
+@@ -179,6 +179,32 @@ class OneLine:
+                             state_action_log[i][-1]["decision_confidence"] = self.agents[i].last_confidence
+                         if getattr(self.agents[i], "last_probabilities", None) is not None:
+                             state_action_log[i][-1]["decision_probabilities"] = self.agents[i].last_probabilities
++                        agent = self.agents[i]
++                        if self.dic_traffic_env_conf["MODEL_NAME"] == "TrafficQwen":
++                            state_action_log[i][-1].update({
++                                "model_name": "Traffic-Qwen-V1-Dual-Choice",
++                                "checkpoint": agent.model_path,
++                                "phase_probabilities": agent.last_phase_probabilities,
++                                "duration_probabilities": agent.last_duration_probabilities,
++                                "proposed_phase": agent.last_proposed_phase,
++                                "proposed_duration": agent.last_proposed_duration,
++                                "predicted_phase": (f"phase_{agent.PHASE_OPTIONS.index(max(agent.last_phase_probabilities, key=agent.last_phase_probabilities.get))}"
++                                                    if agent.last_phase_probabilities else None),
++                                "predicted_duration": (max(agent.last_duration_probabilities, key=agent.last_duration_probabilities.get)
++                                                       if agent.last_duration_probabilities else None),
++                                "applied_phase": agent.last_applied_phase + 1 if agent.last_applied_phase is not None else None,
++                                "applied_duration": agent.last_applied_duration,
++                                "phase_confidence": max(agent.last_phase_probabilities.values()) if agent.last_phase_probabilities else None,
++                                "duration_confidence": max(agent.last_duration_probabilities.values()) if agent.last_duration_probabilities else None,
++                                "latency_ms": agent.last_latency_ms,
++                                "guardrail_corrected": bool(agent.last_guardrail),
++                                "guardrail_details": agent.last_guardrail,
++                                "fallback_used": agent.last_fallback_used,
++                                "simulation_time": current_time,
++                                "intersection_id": self.env.list_intersection[i].inter_name,
++                            })
++                            if agent.last_error:
++                                state_action_log[i][-1]["decision_error"] = agent.last_error
+                         if getattr(self.agents[i], "last_exchange", None):
+                             state_action_log[i][-1]["jev_exchange"] = self.agents[i].last_exchange
+ 
+

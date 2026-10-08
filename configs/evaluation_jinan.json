@@ -1,0 +1,14 @@
+{
+  "dataset": "jinan",
+  "traffic_file": "anon_3_4_jinan_real.json",
+  "run_counts": 3600,
+  "seed": 3407,
+  "device": "cuda",
+  "model_path": "checkpoints/traffic-qwen-v1-dual-choice",
+  "main_guardrail": false,
+  "main_fallback": false,
+  "secondary_guardrail": true,
+  "secondary_fallback": true,
+  "decision_interval_seconds": 5,
+  "yellow_transition_seconds": 5
+}

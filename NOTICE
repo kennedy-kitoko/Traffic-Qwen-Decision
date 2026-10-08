@@ -1,0 +1,5 @@
+﻿Traffic-Qwen Decision includes original packaging and glue code under the MIT License.
+
+Portions of the runtime integration are derived from JevLight, Copyright (c) 2026 JevLight contributors, under MIT. The exact upstream commit and local patch are documented in third_party/JEVLIGHT_NOTICE.md and third_party/jevlight-runtime.patch. The JevLight license is reproduced in third_party/JEVLIGHT_LICENSE.
+
+No Qwen base weights, CityFlow source, traffic dataset, Hugging Face cache, or environment binaries are included in the public source set. Third-party model and data terms remain applicable when obtained separately.

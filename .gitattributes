@@ -1,0 +1,6 @@
+﻿* text=auto eol=lf
+*.png binary
+*.gz binary
+*.safetensors binary
+*.bin binary
+*.jsonl linguist-generated=true

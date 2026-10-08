@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "Cite this project and the pinned JevLight and CityFlow sources when using the released code or results."
+title: "Traffic-Qwen Decision: Specialized Non-Generative Decision Model for Adaptive Traffic Signal Control"
+version: 0.1.0
+date-released: 2026-10-09
+abstract: >-
+  A Qwen3.5-0.8B QLoRA/Clef dual-choice traffic-signal controller evaluated
+  with CityFlow on the Jinan 3x4 scenario. The included V1 result is a guarded
+  JevLight action imitation baseline, not RL or a generalization claim.
+keywords:
+  - traffic signal control
+  - CityFlow
+  - decision models
+  - QLoRA
+  - JevLight

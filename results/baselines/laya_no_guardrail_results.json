@@ -1,0 +1,90 @@
+{
+  "guardrail_enabled": false,
+  "horizon_seconds": 3600,
+  "record_directory": "/home/kennedy/JevLight/records/LayaNoGuardrail/anon_3_4_jinan_real.json10_08_11_59_01",
+  "checkpoint_unchanged_sha256_verified": true,
+  "metrics": {
+    "test_reward_over": -327907.1999999998,
+    "test_avg_queue_len_over": 1823.4388888888889,
+    "test_queuing_vehicle_num_over": 1312876,
+    "test_avg_waiting_time_over": 943.759505192812,
+    "test_avg_travel_time_over": 1395.3608748481167
+  },
+  "no_guardrail": {
+    "reward": -327907.1999999998,
+    "avg_queue": 1823.4388888888889,
+    "avg_waiting_time_seconds": 943.759505192812,
+    "avg_travel_time_seconds": 1395.3608748481167,
+    "model_decisions": 1483,
+    "guardrail_corrections": 0,
+    "request_fallbacks": 0,
+    "confidence_min": 0.0,
+    "confidence_mean": 0.0047185434929197575,
+    "confidence_max": 0.0276,
+    "runtime_seconds": 242.82730340957642
+  },
+  "with_guardrail": {
+    "reward": -33074.75000000001,
+    "avg_queue": 185.1638888888889,
+    "avg_waiting_time_seconds": 46.394252633256734,
+    "avg_travel_time_seconds": 299.6061953931692,
+    "model_decisions": 1143,
+    "guardrail_corrections": 944,
+    "request_fallbacks": 0,
+    "confidence_min": 0.0001,
+    "confidence_mean": 0.0034024496937882765,
+    "confidence_max": 0.0276,
+    "runtime_seconds": 159.45568990707397
+  },
+  "comparison": {
+    "reward": {
+      "delta_no_guardrail_minus_guardrail": -294832.4499999998,
+      "percent_delta_relative_to_absolute_guardrail": -891.4124823316872
+    },
+    "avg_queue": {
+      "delta_no_guardrail_minus_guardrail": 1638.275,
+      "percent_delta_relative_to_absolute_guardrail": 884.7702485785866
+    },
+    "avg_waiting_time_seconds": {
+      "delta_no_guardrail_minus_guardrail": 897.3652525595552,
+      "percent_delta_relative_to_absolute_guardrail": 1934.2164204113033
+    },
+    "avg_travel_time_seconds": {
+      "delta_no_guardrail_minus_guardrail": 1095.7546794549476,
+      "percent_delta_relative_to_absolute_guardrail": 365.7316491793514
+    },
+    "model_decisions": {
+      "delta_no_guardrail_minus_guardrail": 340,
+      "percent_delta_relative_to_absolute_guardrail": 29.746281714785653
+    },
+    "guardrail_corrections": {
+      "delta_no_guardrail_minus_guardrail": -944,
+      "percent_delta_relative_to_absolute_guardrail": -100.0
+    },
+    "request_fallbacks": {
+      "delta_no_guardrail_minus_guardrail": 0,
+      "percent_delta_relative_to_absolute_guardrail": null
+    },
+    "confidence_min": {
+      "delta_no_guardrail_minus_guardrail": -0.0001,
+      "percent_delta_relative_to_absolute_guardrail": -100.0
+    },
+    "confidence_mean": {
+      "delta_no_guardrail_minus_guardrail": 0.001316093799131481,
+      "percent_delta_relative_to_absolute_guardrail": 38.680771725566544
+    },
+    "confidence_max": {
+      "delta_no_guardrail_minus_guardrail": 0.0,
+      "percent_delta_relative_to_absolute_guardrail": 0.0
+    },
+    "runtime_seconds": {
+      "delta_no_guardrail_minus_guardrail": 83.37161350250244,
+      "percent_delta_relative_to_absolute_guardrail": 52.285129211186465
+    }
+  },
+  "interpretation_limits": [
+    "Single run per condition; no uncertainty estimate.",
+    "Disables both phase guardrail and backlog-based duration adjustments.",
+    "Fallback remains possible in code; inspect request_fallbacks."
+  ]
+}

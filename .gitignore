@@ -1,0 +1,89 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+conda-env/
+*.egg-info/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*token*
+*secret*
+credentials*
+wandb_api_key*
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Hugging Face and model caches
+.cache/
+huggingface/
+hf_cache/
+**/.cache/huggingface/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.gguf
+
+# LoRA and checkpoints
+checkpoints/traffic-qwen-v1-dual-choice/*
+!checkpoints/traffic-qwen-v1-dual-choice/README.md
+!checkpoints/README.md
+!checkpoints/manifests/
+outputs/
+models_cache/
+checkpoint-*/
+optimizer.pt
+scheduler.pt
+trainer_state.json
+
+# Experiment tracking
+wandb/
+runs/
+logs/
+*.log
+!results/reports/tests.log
+
+# Large generated datasets
+data/traffic_qwen/v1_dual_choice/*.jsonl
+data/traffic_qwen/v2*/
+data/generated*/
+!data/sample/
+!data/manifests/
+!data/README.md
+
+# Simulation outputs
+records/
+errors/
+*.replay
+*.pkl
+*.archive
+
+## Full traffic-derived traces stay local until redistribution rights are verified
+decision_trace.jsonl
+*.jsonl.gz
+
+# External code checkout and temporary output
+.deps/
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Stray Windows-mounted duplicate; canonical waiting-time figure is avg_waiting_time.png
+/results/figures/et avg_waiting_time.png

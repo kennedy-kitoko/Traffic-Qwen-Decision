@@ -1,0 +1,127 @@
+{
+  "base_model_weights_included": false,
+  "conda_environment_included": false,
+  "files": [
+    {
+      "git": "excluded",
+      "path": "data/traffic_qwen/v1_dual_choice/train.jsonl",
+      "present_in_staging": false,
+      "reason": "Jinan-derived training data; rights unverified",
+      "sha256": "26da482a97aafda1369dedd3a9e62e4c1b483d1fe24d8507e186f242d23240aa",
+      "size_bytes": 2955295
+    },
+    {
+      "git": "excluded",
+      "path": "data/traffic_qwen/v1_dual_choice/validation.jsonl",
+      "present_in_staging": false,
+      "reason": "Jinan-derived training data; rights unverified",
+      "sha256": "e9f65d634ef1fde39bbc1ceb117d00529296c107585b16f332de2a6612e50d13",
+      "size_bytes": 487140
+    },
+    {
+      "git": "excluded",
+      "path": "data/traffic_qwen/v1_dual_choice/test.jsonl",
+      "present_in_staging": false,
+      "reason": "Jinan-derived training data; rights unverified",
+      "sha256": "90a40a7a6833792ab21fd035306af65a79152fd39ef1a3d899ba60cd212b3e3c",
+      "size_bytes": 535801
+    },
+    {
+      "git": "ignored",
+      "path": "results/traces/decision_trace.jsonl",
+      "present_in_staging": true,
+      "reason": "Full Jinan-derived trace retained locally; rights unverified",
+      "sha256": "b4f6b664b75f450bfa0692e4aa18e77b364e003b0ab0c7ab2faa80cb165e806f",
+      "size_bytes": 18219026
+    },
+    {
+      "git": "ignored",
+      "path": "results/traces/decision_trace.jsonl.gz",
+      "present_in_staging": true,
+      "reason": "Full Jinan-derived trace retained locally; rights unverified",
+      "sha256": "746482fc152ebda1a92045a33d351cd6ebd5bdb8b2cd9aff0e49fcf75e35aade",
+      "size_bytes": 1291629
+    },
+    {
+      "git": "ignored",
+      "path": "checkpoints/traffic-qwen-v1-dual-choice/adapter_config.json",
+      "present_in_staging": true,
+      "reason": "Local adapter/head and supporting model files",
+      "sha256": "346d232f1fb52fa51846fb39b8e85776d9a3aec6dd091ecb0dfc505dc1aa4ce8",
+      "size_bytes": 1745
+    },
+    {
+      "git": "ignored",
+      "path": "checkpoints/traffic-qwen-v1-dual-choice/adapter_model.safetensors",
+      "present_in_staging": true,
+      "reason": "Local adapter/head and supporting model files",
+      "sha256": "48de02b180ffaad6f07357ccbfb794c27a7dda8d6e196e808c84d2c42ac04588",
+      "size_bytes": 43346432
+    },
+    {
+      "git": "ignored",
+      "path": "checkpoints/traffic-qwen-v1-dual-choice/chat_template.jinja",
+      "present_in_staging": true,
+      "reason": "Local adapter/head and supporting model files",
+      "sha256": "ea210e5b4997b7b1d3af5ee3ad34e7677ffe38df7469e8d88089789b5a27fae5",
+      "size_bytes": 7991
+    },
+    {
+      "git": "ignored",
+      "path": "checkpoints/traffic-qwen-v1-dual-choice/joint_head.safetensors",
+      "present_in_staging": true,
+      "reason": "Local adapter/head and supporting model files",
+      "sha256": "0efcf4e28a5157d3f40e9b6de078ea8282d7b16af1d63487da2529347fdb2d90",
+      "size_bytes": 109311728
+    },
+    {
+      "git": "ignored",
+      "path": "checkpoints/traffic-qwen-v1-dual-choice/joint_head_config.json",
+      "present_in_staging": true,
+      "reason": "Local adapter/head and supporting model files",
+      "sha256": "99f65ef462b1c92d9304ad1acecbbab93506efc0ba8227c46582b4264d27aa30",
+      "size_bytes": 116
+    },
+    {
+      "git": "ignored",
+      "path": "checkpoints/traffic-qwen-v1-dual-choice/processor_config.json",
+      "present_in_staging": true,
+      "reason": "Local adapter/head and supporting model files",
+      "sha256": "3814737f2d4bfdd153a82364b3850f1be5dbc6f074a55c8d5fbf4d40127c3e87",
+      "size_bytes": 1325
+    },
+    {
+      "git": "ignored",
+      "path": "checkpoints/traffic-qwen-v1-dual-choice/tokenizer.json",
+      "present_in_staging": true,
+      "reason": "Local adapter/head and supporting model files",
+      "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "size_bytes": 19989325
+    },
+    {
+      "git": "ignored",
+      "path": "checkpoints/traffic-qwen-v1-dual-choice/tokenizer_config.json",
+      "present_in_staging": true,
+      "reason": "Local adapter/head and supporting model files",
+      "sha256": "34fe820357cd049c8f014658e64df5885f94c8238e5e0ad5363b3cb6a7534ca1",
+      "size_bytes": 7186
+    },
+    {
+      "git": "ignored",
+      "path": "checkpoints/traffic-qwen-v1-dual-choice/training_args.bin",
+      "present_in_staging": true,
+      "reason": "Local adapter/head and supporting model files",
+      "sha256": "991c95872abc6343ed3ec24339337b0aef6ee85e084d8a89abef87ddc364bb88",
+      "size_bytes": 5265
+    },
+    {
+      "git": "ignored",
+      "path": "checkpoints/traffic-qwen-v1-dual-choice/unsloth_decision_config.json",
+      "present_in_staging": true,
+      "reason": "Local adapter/head and supporting model files",
+      "sha256": "589faf7823cc6460a51c94fc9b618931873c0e6804c3d22c158ad9232b9a6861",
+      "size_bytes": 177
+    }
+  ],
+  "huggingface_cache_included": false
+}

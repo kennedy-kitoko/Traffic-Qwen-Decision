@@ -1,0 +1,182 @@
+{
+  "split_counts": {
+    "train": 792,
+    "validation": 130,
+    "test": 143
+  },
+  "splits": {
+    "train": {
+      "rows": 792,
+      "phase_counts": {
+        "phase_0": 277,
+        "phase_1": 272,
+        "phase_2": 126,
+        "phase_3": 117
+      },
+      "duration_counts_seconds": {
+        "20": 199,
+        "40": 353,
+        "25": 57,
+        "35": 179,
+        "30": 4
+      },
+      "phase_duration_counts": {
+        "phase_0_20": 73,
+        "phase_1_20": 59,
+        "phase_2_20": 34,
+        "phase_0_40": 123,
+        "phase_1_40": 125,
+        "phase_3_20": 33,
+        "phase_2_25": 9,
+        "phase_2_40": 55,
+        "phase_1_25": 23,
+        "phase_0_35": 63,
+        "phase_0_25": 16,
+        "phase_2_35": 27,
+        "phase_3_25": 9,
+        "phase_1_35": 64,
+        "phase_3_40": 50,
+        "phase_3_35": 25,
+        "phase_2_30": 1,
+        "phase_1_30": 1,
+        "phase_0_30": 2
+      },
+      "duplicate_state_rows": 0,
+      "missing_required_fields": {},
+      "intersection_decisions": {
+        "intersection_1_1": 99,
+        "intersection_1_2": 58,
+        "intersection_1_3": 59,
+        "intersection_2_1": 60,
+        "intersection_2_2": 56,
+        "intersection_2_3": 68,
+        "intersection_3_1": 63,
+        "intersection_3_2": 61,
+        "intersection_3_3": 64,
+        "intersection_4_1": 59,
+        "intersection_4_2": 63,
+        "intersection_4_3": 82
+      },
+      "time_min_seconds": 0,
+      "time_max_seconds": 2450,
+      "episode_ids": [
+        "jinan_guardrail_single_run"
+      ]
+    },
+    "validation": {
+      "rows": 130,
+      "phase_counts": {
+        "phase_0": 45,
+        "phase_1": 43,
+        "phase_2": 22,
+        "phase_3": 20
+      },
+      "duration_counts_seconds": {
+        "40": 42,
+        "20": 20,
+        "35": 68
+      },
+      "phase_duration_counts": {
+        "phase_0_40": 15,
+        "phase_1_20": 7,
+        "phase_1_35": 23,
+        "phase_2_35": 11,
+        "phase_2_20": 4,
+        "phase_0_35": 24,
+        "phase_2_40": 7,
+        "phase_1_40": 13,
+        "phase_0_20": 6,
+        "phase_3_35": 10,
+        "phase_3_40": 7,
+        "phase_3_20": 3
+      },
+      "duplicate_state_rows": 0,
+      "missing_required_fields": {},
+      "intersection_decisions": {
+        "intersection_1_2": 10,
+        "intersection_2_3": 12,
+        "intersection_3_1": 11,
+        "intersection_4_1": 11,
+        "intersection_1_1": 17,
+        "intersection_1_3": 11,
+        "intersection_2_1": 11,
+        "intersection_2_2": 10,
+        "intersection_4_3": 9,
+        "intersection_3_2": 9,
+        "intersection_4_2": 10,
+        "intersection_3_3": 9
+      },
+      "time_min_seconds": 2580,
+      "time_max_seconds": 2995,
+      "episode_ids": [
+        "jinan_guardrail_single_run"
+      ]
+    },
+    "test": {
+      "rows": 143,
+      "phase_counts": {
+        "phase_3": 22,
+        "phase_1": 49,
+        "phase_2": 24,
+        "phase_0": 48
+      },
+      "duration_counts_seconds": {
+        "35": 73,
+        "40": 51,
+        "20": 19
+      },
+      "phase_duration_counts": {
+        "phase_3_35": 11,
+        "phase_1_40": 18,
+        "phase_2_35": 13,
+        "phase_0_20": 7,
+        "phase_1_35": 25,
+        "phase_0_35": 24,
+        "phase_0_40": 17,
+        "phase_2_20": 3,
+        "phase_2_40": 8,
+        "phase_1_20": 6,
+        "phase_3_20": 3,
+        "phase_3_40": 8
+      },
+      "duplicate_state_rows": 0,
+      "missing_required_fields": {},
+      "intersection_decisions": {
+        "intersection_4_2": 12,
+        "intersection_4_3": 11,
+        "intersection_2_2": 12,
+        "intersection_2_3": 11,
+        "intersection_1_1": 19,
+        "intersection_3_1": 12,
+        "intersection_3_2": 11,
+        "intersection_4_1": 12,
+        "intersection_1_3": 12,
+        "intersection_2_1": 11,
+        "intersection_3_3": 10,
+        "intersection_1_2": 10
+      },
+      "time_min_seconds": 3130,
+      "time_max_seconds": 3595,
+      "episode_ids": [
+        "jinan_guardrail_single_run"
+      ]
+    }
+  },
+  "cross_split_state_overlap": {
+    "train__validation": 0,
+    "train__test": 0,
+    "validation__test": 0
+  },
+  "cross_split_episode_overlap": {
+    "train__validation": [
+      "jinan_guardrail_single_run"
+    ],
+    "train__test": [
+      "jinan_guardrail_single_run"
+    ],
+    "validation__test": [
+      "jinan_guardrail_single_run"
+    ]
+  },
+  "dataset_note": "Preserved existing V1 splits. Labels imitate guarded JevLight actions; not optimal or counterfactual labels."
+}
