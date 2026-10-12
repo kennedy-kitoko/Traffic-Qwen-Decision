@@ -1,6 +1,4 @@
-<video src="assets/traffic_qwen_inference.mp4" controls autoplay muted loop playsinline width="100%">
-  Your browser does not support embedded video. [Open the Traffic-Qwen inference video](assets/traffic_qwen_inference.mp4).
-</video>
+
 
 ![Traffic-Qwen traffic control](assets/Traffic-Qwen%20_%20trafic.png)
 
@@ -37,8 +35,9 @@ The model therefore learned to reproduce choices found in those data. This was n
 
 ### How does it work in simulation?
 
-[![Watch the Traffic-Qwen CityFlow inference replay](assets/Traffic-Qwen%20_%20trafic.png)](assets/traffic_qwen_inference.mp4)
+[![Watch the Traffic-Qwen CityFlow inference replay](assets/traffic_gwen_inference.png)](assets/traffic_qwen_inference.mp4)
 
+[Open the Traffic-Qwen inference video](assets/traffic_qwen_inference.mp4)
 
 The model maps the traffic state to probability distributions over phases and durations. The controller then selects the most probable option and applies it in CityFlow, with or without the guardrail depending on the experiment. Both outputs are predicted from the same state, but phase and duration are selected separately.
 
