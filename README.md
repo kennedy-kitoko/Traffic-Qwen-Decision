@@ -37,6 +37,8 @@ The model therefore learned to reproduce choices found in those data. This was n
 
 ### How does it work in simulation?
 
+![Traffic-Qwen traffic control](assets/assets/Traffic-Qwen _ trafic.png)
+
 The model maps the traffic state to probability distributions over phases and durations. The controller then selects the most probable option and applies it in CityFlow, with or without the guardrail depending on the experiment. Both outputs are predicted from the same state, but phase and duration are selected separately.
 
 ### What do the Jinan experiments show?
