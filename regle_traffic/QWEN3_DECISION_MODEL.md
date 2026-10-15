@@ -1,367 +1,913 @@
-# comment l'architecture [https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth) sera exelent pour ce role de traffic controle par son architecture que LLM(traffic-R1) ou jev ou laya
-[[Résumé de notre recherche]]
+# Traffic-Qwen Decision Model
 
-Oui, l’architecture « Qwen + tête Clef » est particulièrement adaptée au contrôle du trafic. Mais il faut être précis : **Unsloth est le framework d’entraînement**. L’architecture décisionnelle est composée du backbone Qwen, d’une tête Clef et d’un espace d’actions typé.
+## Architecture décisionnelle pour le contrôle intelligent des feux de circulation
+
+Traffic-Qwen transforme le contrôle d’un feu de circulation en un problème de **décision probabiliste discrète**.
+
+Le contrôleur ne doit pas générer une longue réponse en langage naturel. À chaque état du trafic, il doit sélectionner rapidement une action parmi un ensemble fini de combinaisons **phase + durée**.
+
+L’architecture retenue associe :
+
+- un backbone **Qwen3.5-0.8B** ;
+- une tête de décision **Clef** ;
+- un espace de **24 actions conjointes** ;
+- des cibles probabilistes construites à partir des conséquences mesurées dans **SUMO** ;
+- un masque de sécurité déterministe ;
+- un entraînement SFT, suivi à terme d’un apprentissage par renforcement dans le simulateur.
+
+Unsloth est utilisé comme framework d’entraînement. Ce n’est pas Unsloth lui-même qui constitue l’architecture décisionnelle.
+
+Documentation : [Train Your Own Decision Model with Unsloth](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth)
+
+---
+
+## 1. Problème de décision
+
+Traffic-Qwen contrôle quatre phases :
+
+| ID | Phase |
+| --- | --- |
+| phase_0 | ETWT |
+| phase_1 | NTST |
+| phase_2 | ELWL |
+| phase_3 | NLSL |
+
+Chaque phase peut être associée à six durées :
 
 ```
-État structuré du trafic
-        ↓
+15 s
+20 s
+25 s
+30 s
+35 s
+40 s
+```
+
+L’espace d’action contient donc :
+
+**4 phases × 6 durées = 24 actions**
+
+Exemples :
+
+```
+phase_0_15
+phase_0_20
+phase_0_25
+...
+phase_3_35
+phase_3_40
+```
+
+Le problème appris par le modèle est donc :
+
+> Étant donné l’état actuel de l’intersection et du réseau, quelle combinaison phase–durée présente les meilleures conséquences probables parmi les actions actuellement admissibles ?
+
+---
+
+## 2. Architecture générale
+
+```
+État du trafic
+      ↓
 Qwen3.5-0.8B spécialisé
-        ↓
-représentations de l’état et des 24 options
-        ↓
-tête Clef
-        ↓
-24 scores → softmax → 24 probabilités
-        ↓
-masque de sécurité
-        ↓
-phase + durée appliquées dans SUMO
+      ↓
+Représentation de l’état et des actions candidates
+      ↓
+Tête Clef
+      ↓
+24 logits
+      ↓
+Masque des actions interdites
+      ↓
+Softmax sur les actions admissibles
+      ↓
+24 probabilités
+      ↓
+Sélection de l’action
+      ↓
+Phase + durée
+      ↓
+Contrôleur de sécurité
+      ↓
+SUMO / intersection réelle
 ```
 
-## Pourquoi cette architecture correspond bien au trafic
+Traffic-Qwen est donc utilisé comme **modèle de décision**, et non comme générateur de texte.
 
-Le contrôle d’une intersection n’est pas principalement un problème de rédaction. Le contrôleur doit choisir rapidement une action parmi un ensemble fini.
+---
 
-Dans notre cas :
+## 3. Pourquoi une sortie non générative
 
-\[ 4\ phases \times 6\ durées = 24\ actions \]
-
-Traffic-Qwen V2 doit donc répondre à la question :
-
-> Parmi les 24 combinaisons autorisées, laquelle présente les meilleures conséquences probables dans cet état ?
-
-La documentation Unsloth explique que le modèle lit une seule fois l’état, les questions et les options. Une petite tête inspirée de Clef attribue ensuite un score à chaque option. Le modèle ne génère aucun texte pendant la décision. [Unsloth Decision Model documentation](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth)
-
-### Une décision directe
-
-Un LLM génératif produit normalement :
+Un LLM génératif classique produit une réponse séquentiellement :
 
 ```
-token 1 → token 2 → token 3 → ... → réponse finale
+token 1 → token 2 → token 3 → ... → action
 ```
 
 Traffic-Qwen produit directement :
 
 ```
-24 logits → 24 probabilités → une action
+état → 24 scores → 24 probabilités → action
 ```
 
 Par exemple :
 
-```
+```json
 {
-  "ETWT_15": 0.03,
-  "ETWT_20": 0.06,
-  "NTST_20": 0.09,
-  "NLSL_15": 0.37,
-  "NLSL_20": 0.29
+  "phase_0_15": 0.03,
+  "phase_0_20": 0.06,
+  "phase_1_15": 0.09,
+  "phase_2_15": 0.37,
+  "phase_2_20": 0.29
 }
 ```
 
-Il n’est donc pas nécessaire :
+Les valeurs ci-dessus sont seulement illustratives.
 
-- d’attendre la génération d’un raisonnement ;
-- d’extraire une phase depuis une phrase ;
-- de vérifier si le JSON généré est syntaxiquement valide ;
-- de convertir une durée écrite en langage naturel ;
-- de relancer le modèle à cause d’un format incorrect.
+Cette approche évite, pendant le contrôle temps réel :
 
-C’est un avantage important pour un système qui doit contrôler plusieurs intersections toutes les cinq secondes.
+- la génération d’un raisonnement textuel ;
+- l’extraction d’une phase depuis une phrase ;
+- la génération et la validation d’un JSON ;
+- l’interprétation d’une durée écrite en langage naturel ;
+- les erreurs de format de sortie ;
+- le coût d’un décodage autorégressif inutile pour une action discrète.
 
-## Ce que fait exactement la tête Clef
+Le problème réel est une décision parmi 24 possibilités. L’architecture de sortie doit donc refléter directement cet espace d’action.
 
-La tête Clef ne demande pas au modèle de prédire le prochain mot. Elle examine les représentations calculées par Qwen pour l’état, la question et chaque option.
+---
 
-Elle produit un score :
+## 4. Rôle de la tête Clef
 
-\[ z_a=f_\theta(s,a) \]
+Pour un état de trafic **s**, la tête attribue un logit **z(a)** à chaque action candidate **a**.
 
-pour chaque action \(a\), puis une distribution :
+```
+z(a) = score(s, a)
+```
 
-\[ P(a|s)=\operatorname{softmax}(z_a) \]
+Les logits sont ensuite transformés en probabilités :
 
-Le modèle apprend donc une fonction de classement :
+```
+P(a | s) = exp(z(a)) / Σ exp(z(j))
+```
+
+Le modèle apprend donc essentiellement :
 
 ```
 état du trafic + action candidate
-→ qualité probable de cette action
+                ↓
+score relatif de l’action
 ```
 
-Cela correspond directement à notre dataset SUMO : chaque état contient les conséquences mesurées de plusieurs actions.
+La sortie n’est pas un texte expliquant ce qu’il faudrait faire. C’est une distribution directement exploitable par le contrôleur.
 
-## Pourquoi les labels souples de SUMO conviennent à cette architecture
+---
 
-Supposons que SUMO mesure :
+## 5. Pourquoi utiliser 24 actions conjointes
 
-|Action|Retour|
-|---|---|
-|NLSL 15 s|0,2858|
-|NLSL 20 s|0,2827|
-|NTST 15 s|0,2100|
-|ETWT 40 s|−0,0800|
-
-La différence entre les deux premières actions est faible. Un label dur ferait croire au modèle que :
+Traffic-Qwen V1 séparait la décision en deux sorties :
 
 ```
-NLSL_15 = totalement correcte
-NLSL_20 = totalement incorrecte
+phase  → 4 probabilités
+durée  → 6 probabilités
 ```
 
-Une cible souple peut plutôt indiquer :
+Cette factorisation suppose implicitement qu’une bonne phase et une bonne durée peuvent être sélectionnées presque indépendamment.
+
+Or les deux décisions sont liées.
+
+Une durée de 40 secondes peut être excellente pour une phase fortement chargée et mauvaise pour une autre phase presque vide.
+
+Avec deux distributions séparées, le système approxime une combinaison par :
 
 ```
-NLSL_15 : 0,34
-NLSL_20 : 0,31
-NTST_15 : 0,18
-...
+P(phase, durée | état)
+≈
+P(phase | état) × P(durée | état)
 ```
 
-La tête Clef peut apprendre cette distribution complète. Elle apprend alors :
-
-- quelle action est première ;
-- quelles actions sont presque équivalentes ;
-- quelles actions sont dangereuses ;
-- le niveau d’incertitude de la décision.
-
-C’est plus informatif qu’un simple label fourni par un expert.
-
-## Pourquoi utiliser une tête conjointe à 24 actions
-
-Traffic-Qwen V1 utilisait deux sorties :
+Traffic-Qwen V2 apprend directement :
 
 ```
-phase : 4 probabilités
-durée : 6 probabilités
+P(phase, durée | état)
 ```
-
-Le problème est que ces sorties étaient partiellement indépendantes.
-
-Le modèle pouvait produire :
-
-```
-phase la plus probable = NLSL
-durée la plus probable = 20 s
-```
-
-alors que la meilleure combinaison simulée pouvait être :
-
-```
-NLSL 15 s
-```
-
-ou même :
-
-```
-ETWT 20 s
-```
-
-Avec la tête à 24 actions, la probabilité concerne directement une combinaison :
-
-\[ P(\text{NLSL},15|s) \]
-
-au lieu d’approximer :
-
-\[ P(\text{NLSL}|s)\times P(15|s) \]
-
-La dépendance entre la phase et la durée est donc préservée.
-
-## Le rôle du masque de sécurité
-
-La tête produit des probabilités sur les 24 actions, mais toutes ne sont pas toujours admissibles.
 
 Par exemple :
 
-- vert actuel inférieur à 15 s : aucune nouvelle action, commande `KEEP` ;
-- vert actuel de 25 s : maintenir la même phase pendant 40 s dépasserait le plafond de 60 s ;
-- une voie dépasse 60 s d’attente : sa phase devient prioritaire ;
-- voie aval saturée : certaines actions peuvent être exclues.
-
-Avant l’argmax, nous appliquons :
-
-\[ z'_a = \begin{cases} z_a & \text{si } a \text{ est autorisée}\\ -\infty & \text{si } a \text{ est interdite} \end{cases} \]
-
-puis :
-
-\[ P(a|s,\text{autorisé})=\operatorname{softmax}(z'_a) \]
-
-Traffic-Qwen choisit ainsi la meilleure action parmi les actions sûres.
-
-L’intelligence apprise optimise le trafic ; les règles explicites garantissent les contraintes opérationnelles.
-
-## Comparaison avec Traffic-R1
-
-Traffic-R1 est un modèle de 3 milliards de paramètres entraîné avec exploration, renforcement et guidage expert. Son objectif inclut le raisonnement explicable, la communication entre intersections et la généralisation sans nouvel entraînement. Les auteurs annoncent également un déploiement opérationnel. [Article Traffic-R1](https://arxiv.org/abs/2508.02344)
-
-|Élément|Traffic-R1|Traffic-Qwen Decision|
-|---|---|---|
-|Type|LLM avec raisonnement|modèle de décision|
-|Taille|environ 3B|0,8B|
-|Sortie|raisonnement et action|probabilités directes|
-|Décodage|autorégressif|classement en une passe|
-|Actions invalides|doivent être contrôlées après génération|masque déterministe|
-|Explicabilité|forte|principalement probabiliste|
-|Latence attendue|plus élevée|plus faible|
-|Adaptation inattendue|potentiellement meilleure|dépend fortement des données|
-|Déploiement local massif|plus exigeant|mieux adapté|
-|Généralisation publiée|revendiquée et évaluée par Traffic-R1|pas encore démontrée pour Traffic-Qwen|
-
-Traffic-R1 est plus approprié lorsqu’il faut :
-
-- raisonner sur une situation nouvelle ;
-- expliquer longuement une décision ;
-- comprendre un incident décrit en langage naturel ;
-- coordonner des situations complexes non présentes dans les données.
-
-Traffic-Qwen est plus approprié lorsqu’il faut :
-
-- prendre des milliers de décisions répétées ;
-- garantir un format exact ;
-- fonctionner avec peu de VRAM ;
-- maîtriser la latence ;
-- produire une distribution sur un ensemble fini ;
-- exécuter localement une politique déjà spécialisée.
-
-La meilleure architecture complète peut d’ailleurs utiliser les deux :
-
 ```
-DeepSeek/Traffic-R1 comme expert hors ligne
-→ SUMO valide les conséquences
-→ Traffic-Qwen apprend les décisions
-→ Traffic-Qwen contrôle en temps réel
+P(phase_2_15 | état)
+P(phase_2_20 | état)
+P(phase_2_25 | état)
+...
 ```
 
-Le raisonnement lourd sert à produire et analyser l’expérience. Le modèle décisionnel sert au déploiement.
+La dépendance entre la phase et la durée est donc conservée.
 
-## Comparaison avec Jev
+C’est particulièrement important parce que le dataset SUMO évalue lui-même les combinaisons phase–durée comme des actions conjointes.
 
-Jev et Traffic-Qwen appartiennent à la même famille générale : les modèles System 1 qui prennent une décision typée sans générer un long texte.
+---
 
-Traffic-Qwen n’est donc pas architecturalement opposé à Jev. Il représente plutôt une manière de construire un modèle de type Jev avec :
+## 6. État fourni au modèle
 
-- un backbone Qwen ouvert ;
-- une tête Clef ;
-- QLoRA ;
-- un dataset trafic personnalisé ;
-- un entraînement reproductible avec Unsloth ;
-- un checkpoint local contrôlable.
+Un exemple peut contenir notamment :
 
-L’avantage potentiel de Traffic-Qwen sur un Jev générique vient surtout de la spécialisation :
+- l’intersection focale ;
+- le temps de simulation ;
+- la phase actuellement active ;
+- le temps vert déjà écoulé ;
+- la longueur des files ;
+- le temps d’attente ;
+- les véhicules en approche ;
+- l’occupation des voies ;
+- les informations aval disponibles ;
+- un résumé des autres intersections du réseau ;
+- les contraintes de sécurité actives ;
+- la liste des actions admissibles et interdites.
 
-```
-Jev générique
-→ sait prendre des décisions générales
-
-Traffic-Qwen
-→ apprend la relation entre files, attentes, phases,
-  durées et conséquences SUMO
-```
-
-Un Jev spécialisé sur exactement les mêmes données pourrait aussi devenir très performant. Il faudrait l’entraîner et le comparer dans les mêmes conditions avant de déclarer qu’une architecture est supérieure.
-
-## Comparaison avec Laya
-
-Laya est également un modèle non génératif. Son architecture utilise un encodeur bidirectionnel et des têtes de décision typées. Il renvoie des choix et des probabilités en une passe. Son dépôt annonce notamment une latence de 33 ms pour une question sur T4, avec de meilleures performances après spécialisation. [Dépôt Laya](https://github.com/kalufinnle/laya-decision-model)
-
-Laya possède plusieurs avantages possibles :
-
-- encodeur plus petit ;
-- inférence très rapide ;
-- architecture naturellement consacrée aux décisions ;
-- coût mémoire inférieur ;
-- bon support des questions typées.
-
-Traffic-Qwen possède d’autres avantages possibles :
-
-- représentations préentraînées plus riches de Qwen ;
-- contexte plus long ;
-- adaptation QLoRA facile ;
-- écosystème Unsloth ;
-- tête Clef entraînable avec le backbone ;
-- possibilité future de réutiliser des capacités LLM plus générales.
-
-L’effondrement observé avec Laya sans garde-fou ne prouve pas que Laya est une mauvaise architecture. Il montre surtout que le checkpoint générique ne connaissait pas suffisamment le domaine du trafic.
-
-La comparaison scientifique correcte serait :
-
-```
-Traffic-Qwen entraîné sur V3
-contre
-Laya entraîné sur exactement V3
-```
-
-avec :
-
-- mêmes états ;
-- mêmes actions ;
-- mêmes retours SUMO ;
-- mêmes splits ;
-- mêmes scénarios ;
-- mêmes règles ;
-- plusieurs graines.
-
-## Pourquoi Qwen3.5-0.8B est un bon compromis
-
-Qwen3.5-0.8B conserve une capacité de représentation importante tout en restant assez petit pour :
-
-- la quantification 4 bits ;
-- QLoRA sur une RTX 4060 8 Go ;
-- l’inférence locale ;
-- le traitement de plusieurs intersections ;
-- l’expérimentation rapide ;
-- la sauvegarde d’adapters légers.
-
-La documentation Unsloth indique qu’un Qwen3.5-0.8B transformé en modèle de décision est passé de 36 % à 73 % sur leur benchmark `typed-decisions`, avec des gains importants sur BANKING77 et CLINC150. Cela démontre que la tête et la spécialisation peuvent fortement transformer le comportement du backbone, mais **ce benchmark n’est pas un benchmark de trafic**. [Résultats Unsloth](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth)
-
-Notre propre ablation Traffic-Qwen V1 est plus pertinente pour le trafic : le Qwen/Clef non entraîné restait bloqué sur une phase, tandis que les checkpoints spécialisés utilisaient les quatre phases. Cela constitue une preuve de spécialisation sur Jinan, mais pas encore une preuve de généralisation.
-
-## Architecture recommandée pour Traffic-Qwen V2
+Schématiquement :
 
 ```
 État focal détaillé
-+ résumé du réseau
-+ phase actuelle
-+ vert écoulé
-+ attentes
-+ files
-+ arrivées
-+ occupation aval
++
+Contexte du réseau
++
+Phase actuelle
++
+Temps vert écoulé
++
+Files et attentes
++
+Arrivées
++
+Occupation
++
+Contraintes opérationnelles
         ↓
-Qwen3.5-0.8B 4-bit + LoRA
-        ↓
-tête Clef à 24 actions conjointes
-        ↓
-distribution apprise depuis les retours SUMO
-        ↓
-masque min 15 s / max 60 s / priorité attente
-        ↓
-argmax en évaluation
-ou échantillonnage contrôlé en apprentissage
-        ↓
-phase + durée
-        ↓
-jaune 5 s si changement
-        ↓
-SUMO
+Traffic-Qwen
 ```
 
-Cette architecture est excellente pour Traffic-Qwen parce que le problème possède :
+Le modèle dispose ainsi d’un état structuré avant de classer les actions candidates.
 
-- un état structuré ;
-- un petit espace d’actions discret ;
-- des contraintes explicites ;
-- une fréquence de décision élevée ;
-- un besoin de probabilités ;
-- un besoin de faible latence ;
-- un simulateur capable de produire des labels fondés sur les conséquences.
+---
 
-Elle n’est pas automatiquement meilleure que Traffic-R1, Jev ou Laya. Sa force apparaît si nous réunissons quatre éléments :
+## 7. Les labels viennent des conséquences SUMO
 
-1. un dataset SUMO diversifié et correctement séparé ;
-2. des cibles conjointes phase-durée ;
-3. une calibration fiable ;
-4. des évaluations sur plusieurs épisodes, demandes, graines, villes et incidents.
+Le dataset V2 ne demande pas simplement à un LLM expert de fournir une action à imiter.
 
-La formulation scientifique juste est donc :
+Pour chaque état sélectionné :
 
-> Traffic-Qwen associe les représentations d’un petit modèle Qwen à une tête Clef non générative afin de transformer le contrôle des feux en classement probabiliste de 24 actions sûres. Cette architecture est mieux adaptée à l’inférence locale rapide qu’un LLM génératif, mais sa supériorité en matière de circulation dépendra de la qualité du dataset simulé et devra être démontrée face à Traffic-R1, Jev, Laya et MaxPressure sur des protocoles identiques.
+```
+Épisode SUMO
+    ↓
+Trajectoire jusqu’au temps choisi
+    ↓
+Snapshot du réseau
+    ↓
+Masque de sécurité
+    ↓
+Proposition initiale du teacher
+    ↓
+Restauration du même snapshot
+    ↓
+Test des actions admissibles
+    ↓
+Mesure des conséquences pendant 120 s
+    ↓
+Calcul de la récompense
+    ↓
+Distribution probabiliste sur les actions
+```
+
+Chaque branche admissible part donc du même état initial et utilise le même protocole d’évaluation.
+
+Le teacher aide à analyser l’état et les conséquences, mais la supervision principale est ancrée dans les résultats mesurés par le simulateur.
+
+---
+
+## 8. Fonction de récompense
+
+Les conséquences d’une action sont évaluées à partir de plusieurs composantes du trafic, notamment :
+
+- file moyenne ;
+- temps d’attente ;
+- débit ;
+- changements de phase ;
+- famine d’un mouvement ;
+- spillback.
+
+Schématiquement :
+
+```
+Reward =
+  contribution_queue
++ contribution_waiting
++ contribution_throughput
++ contribution_switching
++ contribution_starvation
++ contribution_spillback
+```
+
+Les poids exacts sont définis par le protocole de génération du dataset.
+
+Une action gagnante signifie donc :
+
+> meilleure action parmi les actions évaluées dans cet état, avec cette fonction de récompense, cet horizon de simulation, ces contraintes et cette politique de continuation.
+
+Cela ne signifie pas qu’elle est globalement optimale pour toutes les évolutions futures possibles du réseau.
+
+---
+
+## 9. Soft targets
+
+Le dataset ne force pas systématiquement une cible one-hot.
+
+Supposons que plusieurs actions donnent des résultats très proches :
+
+| Action | Retour SUMO |
+| --- | ---: |
+| phase_3_15 | 0.2858 |
+| phase_3_20 | 0.2827 |
+| phase_1_15 | 0.2100 |
+| phase_0_40 | -0.0800 |
+
+Un label dur réduirait l’information à :
+
+```
+phase_3_15 = correcte
+toutes les autres = incorrectes
+```
+
+Traffic-Qwen conserve plutôt une distribution probabiliste :
+
+```json
+{
+  "phase_3_15": 0.34,
+  "phase_3_20": 0.31,
+  "phase_1_15": 0.18,
+  "phase_0_40": 0.01
+}
+```
+
+Ces nombres sont illustratifs.
+
+Le modèle peut ainsi apprendre :
+
+- quelle action est la meilleure ;
+- quelles actions sont presque équivalentes ;
+- quelles actions sont clairement mauvaises ;
+- quand la décision est ambiguë ;
+- quand une préférence est très forte.
+
+Les soft targets sont particulièrement utiles lorsque plusieurs actions ont des conséquences similaires.
+
+---
+
+## 10. Masque de sécurité
+
+L’intelligence apprise ne remplace pas les contraintes opérationnelles.
+
+Traffic-Qwen peut attribuer un score à une action qui n’est pas admissible dans l’état courant. Le contrôleur applique donc un masque avant la sélection finale.
+
+Pour chaque action :
+
+```
+si action autorisée :
+    logit_final = logit_model
+
+si action interdite :
+    logit_final = -∞
+```
+
+Le softmax est ensuite calculé uniquement sur les actions admissibles.
+
+Ainsi :
+
+```
+P(action interdite) = 0
+```
+
+Les probabilités restantes sont renormalisées.
+
+---
+
+## 11. Vert minimum et vert maximum
+
+Le protocole impose :
+
+```
+vert minimum = 15 secondes
+vert maximum = 60 secondes
+```
+
+Le temps considéré est le **temps vert continu effectif** de la phase.
+
+### Avant 15 secondes
+
+Un changement de phase est interdit.
+
+```
+elapsed_green < 15 s
+→ changement de phase interdit
+```
+
+### Entre 15 et 60 secondes
+
+Le modèle peut sélectionner une action admissible selon l’état du trafic et les autres contraintes.
+
+```
+15 s ≤ elapsed_green < 60 s
+→ décision autorisée
+```
+
+### À 60 secondes
+
+La phase ne peut plus être prolongée au-delà du maximum configuré.
+
+```
+elapsed_green = 60 s
+→ extension de la même phase interdite
+```
+
+Le temps jaune n’est pas comptabilisé comme temps vert.
+
+---
+
+## 12. Une même phase signifie une extension
+
+Lorsque le modèle choisit à nouveau la phase actuellement active, le compteur de vert ne doit pas être réinitialisé.
+
+Exemple :
+
+```
+phase actuelle : phase_2
+vert écoulé : 45 s
+action demandée : phase_2_15
+```
+
+Résultat :
+
+```
+45 + 15 = 60 s
+→ action admissible
+```
+
+Mais :
+
+```
+phase actuelle : phase_2
+vert écoulé : 50 s
+action demandée : phase_2_15
+```
+
+donnerait :
+
+```
+50 + 15 = 65 s
+→ action interdite
+```
+
+Le maximum de 60 secondes porte donc sur le vert continu cumulé, pas uniquement sur la durée contenue dans l’action.
+
+---
+
+## 13. Sécurité dynamique pendant une branche SUMO
+
+Une action peut être admissible au moment où elle commence puis devenir problématique pendant son évaluation.
+
+Le simulateur continue donc à vérifier les règles pendant l’exécution.
+
+Si une contrainte critique est déclenchée :
+
+```
+action en cours
+      ↓
+violation détectée
+      ↓
+interruption de la branche
+      ↓
+action marquée invalide
+      ↓
+probabilité cible = 0
+```
+
+Cela empêche le dataset d’enseigner comme souhaitable une action dont les conséquences violent les règles de sécurité.
+
+---
+
+## 14. Architecture d’apprentissage
+
+La trajectoire prévue est :
+
+```
+Dataset SUMO contrefactuel
+        ↓
+SFT Traffic-Qwen
+        ↓
+Politique spécialisée initiale
+        ↓
+Évaluation dans SUMO
+        ↓
+Apprentissage par renforcement
+        ↓
+Politique améliorée
+        ↓
+Tests multi-scénarios
+        ↓
+Déploiement expérimental
+```
+
+### Étape 1 — SFT
+
+Le SFT apprend au modèle les préférences issues des évaluations contrefactuelles SUMO.
+
+L’objectif est de produire une politique initiale compétente et stable avant l’exploration RL.
+
+### Étape 2 — RL
+
+Après le SFT, Traffic-Qwen pourra interagir directement avec SUMO.
+
+```
+état
+  ↓
+Traffic-Qwen
+  ↓
+action
+  ↓
+SUMO
+  ↓
+nouvel état + récompense
+  ↓
+mise à jour de la politique
+```
+
+Le teacher n’est alors plus nécessaire pour chaque décision.
+
+Le RL doit permettre au modèle d’améliorer sa politique à partir de ses propres trajectoires plutôt que de rester limité à l’imitation des décisions présentes dans le dataset SFT.
+
+---
+
+## 15. Pourquoi Qwen3.5-0.8B
+
+Le backbone de 0,8 milliard de paramètres constitue un compromis entre capacité de représentation et coût de déploiement.
+
+Les objectifs sont notamment :
+
+- entraînement QLoRA sur du matériel accessible ;
+- quantification ;
+- faible consommation de VRAM ;
+- inférence locale ;
+- latence réduite ;
+- possibilité de servir plusieurs intersections ;
+- adaptation rapide à de nouveaux datasets ;
+- conservation des représentations riches acquises pendant le préentraînement.
+
+La documentation Unsloth rapporte des gains importants après transformation et spécialisation d’un petit Qwen en modèle de décision sur ses benchmarks de décisions typées.
+
+Ces résultats démontrent la capacité de l’architecture à être spécialisée, mais ils ne constituent pas une preuve de performance en contrôle du trafic.
+
+La performance trafic doit être mesurée directement dans SUMO puis, à terme, dans des environnements réels.
+
+---
+
+## 16. Comparaison avec un LLM génératif
+
+| Propriété | LLM génératif de contrôle | Traffic-Qwen Decision |
+| --- | --- | --- |
+| Sortie | texte + action | action probabiliste |
+| Décodage | autorégressif | décision en une passe |
+| Format | doit être contrôlé | espace d’action fermé |
+| Actions possibles | potentiellement ouvertes | 24 actions définies |
+| Probabilités | pas toujours directement exploitables | natives |
+| Masque d’actions | contrôle externe nécessaire | intégré au pipeline |
+| Latence visée | plus élevée | plus faible |
+| Explicabilité textuelle | forte | limitée |
+| Déploiement local | plus coûteux | objectif principal |
+| Contrôle répétitif | possible | architecture dédiée |
+
+Traffic-Qwen sacrifie volontairement une partie de la flexibilité linguistique au profit d’un espace de décision fermé, contrôlable et rapide.
+
+---
+
+## 17. Comparaison avec Traffic-R1
+
+Traffic-R1 explore l’utilisation d’un LLM spécialisé pour le contrôle des feux et met davantage l’accent sur le raisonnement, l’apprentissage par renforcement et les capacités générales du modèle.
+
+Article : [Traffic-R1](https://arxiv.org/abs/2508.02344)
+
+Traffic-Qwen poursuit un objectif différent :
+
+```
+Traffic-R1
+→ modèle de contrôle fondé sur les capacités de raisonnement d’un LLM
+
+Traffic-Qwen
+→ modèle compact transformant directement un état en distribution d’actions
+```
+
+Traffic-R1 peut être intéressant lorsqu’un système doit raisonner explicitement sur des situations nouvelles ou complexes.
+
+Traffic-Qwen vise surtout :
+
+- les décisions répétitives à haute fréquence ;
+- la faible latence ;
+- l’inférence locale ;
+- un format de sortie garanti ;
+- un petit espace d’action ;
+- un déploiement massif sur plusieurs intersections.
+
+La supériorité de l’un ou de l’autre ne doit pas être supposée. Elle doit être mesurée sous un protocole commun.
+
+---
+
+## 18. Comparaison avec Jev
+
+Jev et Traffic-Qwen partagent une idée importante : une tâche décisionnelle n’a pas nécessairement besoin d’une génération textuelle complète.
+
+Traffic-Qwen applique cette philosophie spécifiquement au contrôle du trafic avec :
+
+- un backbone Qwen ouvert ;
+- une tête Clef ;
+- 24 actions phase–durée ;
+- un dataset SUMO spécialisé ;
+- des soft targets ;
+- un entraînement reproductible ;
+- un checkpoint local contrôlable.
+
+La comparaison scientifique pertinente n’est donc pas :
+
+```
+Qwen est meilleur que Jev
+```
+
+mais :
+
+```
+Traffic-Qwen spécialisé
+vs
+Jev spécialisé
+```
+
+avec les mêmes états, les mêmes actions, les mêmes scénarios et les mêmes métriques.
+
+---
+
+## 19. Comparaison avec Laya
+
+Laya appartient également à la famille des modèles de décision non génératifs.
+
+Dépôt : [Laya Decision Model](https://github.com/kalufinnle/laya-decision-model)
+
+Ses avantages potentiels comprennent :
+
+- petite architecture ;
+- inférence rapide ;
+- décisions typées ;
+- faible coût mémoire.
+
+Traffic-Qwen privilégie de son côté :
+
+- les représentations du backbone Qwen ;
+- la spécialisation QLoRA ;
+- l’écosystème Unsloth ;
+- la possibilité de conserver une capacité de représentation issue d’un LLM préentraîné.
+
+Une comparaison correcte exige :
+
+```
+même dataset
+mêmes splits
+mêmes 24 actions
+mêmes règles
+mêmes épisodes SUMO
+mêmes métriques
+plusieurs seeds
+```
+
+Un modèle générique qui échoue sur le trafic ne démontre pas que son architecture est mauvaise. Il peut simplement ne pas avoir appris ce domaine.
+
+---
+
+## 20. Teacher LLM et Traffic-Qwen n’ont pas le même rôle
+
+Le teacher utilisé pendant la construction du dataset et Traffic-Qwen ont des fonctions différentes.
+
+### Teacher
+
+Le teacher peut :
+
+- analyser un état ;
+- proposer une décision initiale ;
+- examiner les conséquences simulées ;
+- réviser son choix ;
+- contribuer à l’analyse du dataset.
+
+### SUMO
+
+SUMO fournit les conséquences mesurées des actions candidates.
+
+### Traffic-Qwen
+
+Traffic-Qwen apprend ensuite une politique compacte à partir de ces expériences.
+
+```
+Teacher
+   ↓
+proposition et analyse
+   ↓
+SUMO
+   ↓
+conséquences mesurées
+   ↓
+soft targets
+   ↓
+Traffic-Qwen
+   ↓
+contrôle rapide
+```
+
+Traffic-Qwen ne cherche donc pas simplement à reproduire mot pour mot le teacher.
+
+---
+
+## 21. Architecture cible complète
+
+```
+Capteurs / SUMO
+      ↓
+Construction de l’état
+      ↓
+Intersection focale + contexte réseau
+      ↓
+Qwen3.5-0.8B
+      ↓
+Tête Clef
+      ↓
+24 logits phase–durée
+      ↓
+Masque de sécurité
+      ↓
+Softmax sur actions admissibles
+      ↓
+Distribution de probabilité
+      ↓
+Sélection
+      ↓
+Contrôleur déterministe
+      ↓
+Phase verte
+      ↓
+Transition de sécurité si nécessaire
+      ↓
+Nouvel état
+```
+
+Les responsabilités sont séparées :
+
+```
+Qwen + Clef
+→ intelligence décisionnelle
+
+Masque
+→ admissibilité
+
+Contrôleur de signal
+→ exécution sûre
+
+SUMO
+→ environnement d’apprentissage et d’évaluation
+```
+
+---
+
+## 22. Ce que Traffic-Qwen doit démontrer
+
+L’architecture est prometteuse, mais la performance doit être démontrée expérimentalement.
+
+Les principales hypothèses sont :
+
+### H1 — Spécialisation
+
+Le modèle spécialisé doit être meilleur que le checkpoint non spécialisé.
+
+### H2 — Décision conjointe
+
+La tête à 24 actions doit mieux préserver l’interaction phase–durée qu’une factorisation indépendante.
+
+### H3 — Performance trafic
+
+Traffic-Qwen doit améliorer les métriques de circulation par rapport aux baselines pertinentes.
+
+### H4 — Faible latence
+
+L’inférence doit être suffisamment rapide pour un contrôle local multi-intersections.
+
+### H5 — Généralisation
+
+Le modèle doit rester performant sur des épisodes, seeds, demandes et scénarios non vus pendant l’entraînement.
+
+### H6 — Robustesse
+
+Le système doit rester sûr sous congestion forte, changements de demande et situations atypiques.
+
+### H7 — Apport du RL
+
+Le RL doit améliorer la politique SFT sans provoquer d’effondrement, d’oscillations excessives ou de violations des contraintes.
+
+---
+
+## 23. Baselines d’évaluation
+
+Traffic-Qwen devra être comparé à plusieurs familles de contrôleurs :
+
+```
+Fixed-Time
+MaxPressure
+Traffic-Qwen V1
+Traffic-Qwen V2 SFT
+Traffic-Qwen V2 SFT + RL
+Jev spécialisé
+Laya spécialisé
+Traffic-R1 ou protocole comparable
+```
+
+Les comparaisons doivent utiliser autant que possible :
+
+- les mêmes réseaux ;
+- les mêmes fichiers de demande ;
+- les mêmes seeds ;
+- les mêmes horizons ;
+- les mêmes règles de sécurité ;
+- plusieurs épisodes ;
+- des scénarios non vus.
+
+Les métriques peuvent notamment inclure :
+
+- temps de trajet ;
+- temps d’attente ;
+- longueur des files ;
+- débit ;
+- nombre de changements de phase ;
+- starvation ;
+- spillback ;
+- latence d’inférence ;
+- consommation mémoire.
+
+---
+
+## 24. Objectif de déploiement
+
+L’objectif final n’est pas seulement d’obtenir de bonnes performances dans un benchmark.
+
+Traffic-Qwen est conçu pour évoluer vers un contrôleur pouvant fonctionner localement à proximité des intersections.
+
+```
+Caméras / radar / boucles
+        ↓
+Extraction de l’état trafic
+        ↓
+Traffic-Qwen local
+        ↓
+Action phase–durée
+        ↓
+Contrôleur de sécurité indépendant
+        ↓
+Feu de circulation
+```
+
+Le modèle d’IA propose l’action.
+
+Le contrôleur déterministe conserve l’autorité sur les contraintes critiques de sécurité.
+
+Cette séparation est essentielle pour passer d’une expérience SUMO à une architecture de déploiement réel.
+
+---
+
+## 25. Principe central
+
+Traffic-Qwen repose sur une idée simple :
+
+> Le contrôle temps réel d’une intersection est avant tout un problème de décision sous contraintes, pas un problème de génération de texte.
+
+Le projet combine donc :
+
+```
+représentations d’un petit Qwen
++
+tête de décision non générative
++
+24 actions conjointes phase–durée
++
+conséquences mesurées dans SUMO
++
+soft targets
++
+contraintes de sécurité déterministes
++
+SFT
++
+RL
+```
+
+L’objectif scientifique n’est pas d’affirmer à l’avance que cette architecture est supérieure à Traffic-R1, Jev, Laya ou MaxPressure.
+
+L’objectif est de vérifier expérimentalement si un petit modèle décisionnel spécialisé peut atteindre une qualité de contrôle élevée tout en offrant une **latence faible, un espace d’action strict, une inférence locale et une architecture adaptée au déploiement réel**.
